@@ -1,1 +1,1 @@
-include ':app', ':hometab'
+include ':app', ':view_pager_tab'
