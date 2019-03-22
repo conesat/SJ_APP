@@ -34,7 +34,7 @@
             android:gravity="center|left"
             android:padding="20dp">
 
-            <com.hg.sj_app.view.YuanImageView
+            <com.hg.ui.builder.CircularImageView
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_marginLeft="20dp"

@@ -15,9 +15,9 @@
             android:layout_height="wrap_content"
             android:gravity="center|left">
 
-            <com.hg.sj_app.view.YuanImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+            <com.hg.ui.builder.CircularImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:src="#969696" />
 
             <TextView
@@ -67,7 +67,7 @@
                     <ImageView
                         android:layout_width="20dp"
                         android:layout_height="20dp"
-                        android:background="#8A8A8A" />
+                        android:src="@drawable/recommend" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -86,7 +86,7 @@
                     <ImageView
                         android:layout_width="20dp"
                         android:layout_height="20dp"
-                        android:background="#8A8A8A" />
+                        android:src="@drawable/comment" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -104,7 +104,7 @@
                     <ImageView
                         android:layout_width="20dp"
                         android:layout_height="20dp"
-                        android:background="#8A8A8A" />
+                      android:src="@drawable/forward" />
 
                     <TextView
                         android:layout_width="wrap_content"

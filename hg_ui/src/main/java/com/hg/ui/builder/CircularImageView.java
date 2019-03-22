@@ -1,4 +1,4 @@
-package com.hg.sj_app.view;
+package com.hg.ui.builder;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -12,7 +12,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 
-public class YuanImageView extends android.support.v7.widget.AppCompatImageView {
+public class CircularImageView extends android.support.v7.widget.AppCompatImageView {
 
 
     //圆角大小，默认为10
@@ -26,15 +26,15 @@ public class YuanImageView extends android.support.v7.widget.AppCompatImageView 
     //渲染图像，使用图像为绘制图形着色
     private BitmapShader mBitmapShader;
 
-    public YuanImageView(Context context) {
+    public CircularImageView(Context context) {
         this(context, null);
     }
 
-    public YuanImageView(Context context, AttributeSet attrs) {
+    public CircularImageView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public YuanImageView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public CircularImageView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
         mMatrix = new Matrix();
