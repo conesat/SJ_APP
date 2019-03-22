@@ -1,4 +1,4 @@
-package com.hg.ui.builder;
+package com.hg.ui.view;
 
 import android.content.Context;
 import android.graphics.Bitmap;

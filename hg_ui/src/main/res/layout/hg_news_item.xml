@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -15,24 +16,28 @@
             android:layout_height="wrap_content"
             android:gravity="center|left">
 
-            <com.hg.ui.builder.CircularImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+            <com.hg.ui.view.CircularImageView
+                android:id="@+id/hg_news_user_icon"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
                 android:src="#969696" />
 
             <TextView
+                android:id="@+id/hg_news_user_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="20dp"
                 android:layout_weight="1"
-                android:text="TEST_NAME"
+                android:text=""
                 android:textColor="#333"
                 android:textSize="16sp" />
 
             <TextView
+
+                android:id="@+id/hg_news_send_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1hours"
+                android:text=""
                 android:textSize="10sp" />
         </LinearLayout>
 
@@ -43,16 +48,18 @@
             android:orientation="vertical">
 
             <TextView
+                android:textColor="#333"
+                android:id="@+id/hg_news_detail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
-                android:text="Once upon a time there was a baby eagle living in a nest perched on a cliff overlooking a beautiful valley with waterfalls and streams, trees and lots of little animals, scurrying1 about enjoying their lives."
                 android:textSize="14sp" />
 
-            <LinearLayout
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/hg_news_medias"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:background="#707070"></LinearLayout>
+                android:background="#707070"></android.support.v7.widget.RecyclerView>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -65,15 +72,18 @@
                     android:gravity="center">
 
                     <ImageView
+                        android:id="@+id/hg_news_recommend_icon"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:src="@drawable/recommend" />
 
                     <TextView
+
+                        android:id="@+id/hg_news_recommend_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
-                        android:text="推荐 999"
+                        android:text="推荐 "
                         android:textSize="11sp" />
                 </LinearLayout>
 
@@ -84,15 +94,17 @@
                     android:gravity="center">
 
                     <ImageView
+                        android:id="@+id/hg_news_comment_icon"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:src="@drawable/comment" />
 
                     <TextView
+                        android:id="@+id/hg_news_comment_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
-                        android:text="评论 999"
+                        android:text="评论 "
                         android:textSize="11sp" />
                 </LinearLayout>
 
@@ -102,15 +114,17 @@
                     android:gravity="center">
 
                     <ImageView
+                        android:id="@+id/hg_news_forward_icon"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
-                      android:src="@drawable/forward" />
+                        android:src="@drawable/forward" />
 
                     <TextView
+                        android:id="@+id/hg_news_forward_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
-                        android:text="转发 999"
+                        android:text="转发 "
                         android:textSize="11sp" />
                 </LinearLayout>
             </LinearLayout>
@@ -118,8 +132,8 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_marginTop="-10dp"
         android:layout_width="match_parent"
         android:layout_height="10dp"
+        android:layout_marginTop="-10dp"
         android:background="#F5F5F5"></LinearLayout>
 </LinearLayout>
