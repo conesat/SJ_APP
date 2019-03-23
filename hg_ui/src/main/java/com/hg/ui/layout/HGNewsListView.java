@@ -13,6 +13,7 @@ public class HGNewsListView {
     private Context context;
     private List<HGNewsItemEntity> newsEntity;
     private ReloadListView listView;
+    private ListViewAdapter listViewAdapter;
 
     public HGNewsListView(Context context, List<HGNewsItemEntity> newsEntity) {
         this.context = context;
@@ -21,17 +22,30 @@ public class HGNewsListView {
     }
 
     private void initView() {
-        listView=new ReloadListView(context);
-        listView.setAdapter(new ListViewAdapter(context,newsEntity));
+        listView = new ReloadListView(context);
+        listViewAdapter = new ListViewAdapter(context, newsEntity);
+        listView.setAdapter(listViewAdapter);
         listView.setDivider(null);
     }
 
-    public ListView getListView(){
-        return  listView;
+    public ListView getListView() {
+        return listView;
     }
 
-    public void setListViewListener(ReloadListView.LoadListener loadListener){
-        listView.setInteface(loadListener);
+    public void setListViewListener(ReloadListView.LoadListener loadListener) {
+        listView.setLoadListener(loadListener);
     }
 
+
+    public void loadComplete() {
+        listViewAdapter.notifyDataSetChanged();
+        listView.loadComplete();
+        /*if (HGVedioView.player!=null){
+            if (HGVedioView.player.isPlaying()){
+                HGVedioView.player.stop();
+            }
+            HGVedioView.player.release();
+            HGVedioView.player=null;
+        }*/
+    }
 }

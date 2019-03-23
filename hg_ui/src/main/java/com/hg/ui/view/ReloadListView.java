@@ -61,10 +61,10 @@ public class ReloadListView extends ListView implements AbsListView.OnScrollList
             }
         };
         //拿到头布局文件xml
-        headview = LinearLayout.inflate(context, R.layout.reload_list_view_head, null);
+        headview = LinearLayout.inflate(context, R.layout.hg_reload_list_view_head, null);
         topProgressBar = headview.findViewById(R.id.hg_reload_list_view_header_headprogress);
 
-        if (ThemeBuilder.THEME.getTopTabConfig().getTabBackgroudColor()!=Color.WHITE){
+        if (ThemeBuilder.THEME.getTopTabConfig().getTabBackgroudColor() != Color.WHITE) {
             ColorStateList colorStateList = ColorStateList.valueOf(ThemeBuilder.THEME.getTopTabConfig().getTabBackgroudColor());
             topProgressBar.setIndeterminateTintList(colorStateList);
             topProgressBar.setIndeterminateTintMode(PorterDuff.Mode.SRC_ATOP);
@@ -73,7 +73,7 @@ public class ReloadListView extends ListView implements AbsListView.OnScrollList
 
         headerTitle = headview.findViewById(R.id.hg_reload_list_view_title);
         //拿到尾布局文件
-        bottomview = LinearLayout.inflate(context, R.layout.reload_list_view_bottom, null);
+        bottomview = LinearLayout.inflate(context, R.layout.hg_reload_list_view_bottom, null);
         //测量尾文件高度
         bottomview.measure(0, 0);
         //拿到高度
@@ -97,12 +97,11 @@ public class ReloadListView extends ListView implements AbsListView.OnScrollList
             case MotionEvent.ACTION_DOWN:
                 Yload = (int) ev.getY();
                 break;
-
             case MotionEvent.ACTION_MOVE:
                 if (!isLoading) {
                     int moveY = (int) ev.getY();
                     int paddingY = moveY - Yload - headHeight;
-                    if (paddingY < headHeight * 2) {
+                    if (paddingY < headHeight * 2 && paddingY > 0) {
                         headerTitle.setVisibility(VISIBLE);
                         headerTitle.setText("下拉刷新........");
                         topProgressBar.setVisibility(View.GONE);
@@ -122,7 +121,13 @@ public class ReloadListView extends ListView implements AbsListView.OnScrollList
     }
 
     public void onScrollStateChanged(AbsListView view, int scrollState) {
-        if (totaItemCounts == lassVisible && scrollState == SCROLL_STATE_IDLE) {
+        if (scrollState == SCROLL_STATE_IDLE) {
+           // NewsItemView newsItemView = (NewsItemView) getChildAt(1);
+           /* if (newsItemView.getJcVideoPlayer() != null) {
+                newsItemView.getJcVideoPlayer().pasue();
+            }*/
+        }
+        if (totaItemCounts <= lassVisible + 1 && scrollState == SCROLL_STATE_IDLE) {
             if (!isLoading) {
                 load();
                 bottomview.setPadding(0, 0, 0, 0);
@@ -132,7 +137,7 @@ public class ReloadListView extends ListView implements AbsListView.OnScrollList
                 isLoading = true;
             }
         }
-        if (firstVisible == 0 && scrollState == SCROLL_STATE_IDLE) {
+        if (firstVisible <= 1 && scrollState == SCROLL_STATE_IDLE) {
             if (!isLoading) {
                 if (isRefresh) {
                     load();
@@ -140,7 +145,7 @@ public class ReloadListView extends ListView implements AbsListView.OnScrollList
                     topProgressBar.setVisibility(VISIBLE);
                     headerTitle.setVisibility(GONE);
                     if (loadListener != null)
-                        loadListener.PullLoad();
+                        loadListener.pullLoad();
                     isLoading = true;
                     isRefresh = false;
                 } else {
@@ -170,7 +175,7 @@ public class ReloadListView extends ListView implements AbsListView.OnScrollList
     public interface LoadListener {
         void onLoad();
 
-        void PullLoad();
+        void pullLoad();
     }
 
 
@@ -189,7 +194,7 @@ public class ReloadListView extends ListView implements AbsListView.OnScrollList
         headview.setPadding(0, -headHeight, 0, 0);
     }
 
-    public void setInteface(LoadListener loadListener) {
+    public void setLoadListener(LoadListener loadListener) {
         this.loadListener = loadListener;
     }
 }

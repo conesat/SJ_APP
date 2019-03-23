@@ -12,7 +12,7 @@ public class HGNewsItemEntity {
 
     private String newsDetail;//文本内容
 
-    private List<String> medias;//媒体内容
+    private List<HGNewsMediaEntity> medias;//媒体内容
 
     private String mediaType;//媒体类型
 
@@ -38,7 +38,7 @@ public class HGNewsItemEntity {
         this.newsDetail = newsDetail;
     }
 
-    public void setMedias(List<String> medias) {
+    public void setMedias(List<HGNewsMediaEntity> medias) {
         this.medias = medias;
     }
 
@@ -74,7 +74,7 @@ public class HGNewsItemEntity {
         return newsDetail;
     }
 
-    public List<String> getMedias() {
+    public List<HGNewsMediaEntity> getMedias() {
         return medias;
     }
 
@@ -97,7 +97,7 @@ public class HGNewsItemEntity {
     public HGNewsItemEntity() {
     }
 
-    public HGNewsItemEntity(String senderIconUrl, String senderName, String sendTime, String newsDetail, List<String> medias, String mediaType, Long commentNum, Long forwardNum, Long recommendNum) {
+    public HGNewsItemEntity(String senderIconUrl, String senderName, String sendTime, String newsDetail, List<HGNewsMediaEntity> medias, String mediaType, Long commentNum, Long forwardNum, Long recommendNum) {
         this.senderIconUrl = senderIconUrl;
         this.senderName = senderName;
         this.sendTime = sendTime;

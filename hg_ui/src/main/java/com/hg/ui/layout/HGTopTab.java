@@ -70,7 +70,9 @@ public class HGTopTab {
         tabsView.setPadding(tabConfig.getLayoutBounds().getLeft(), tabConfig.getLayoutBounds().getTop(), tabConfig.getLayoutBounds().getRight(), tabConfig.getLayoutBounds().getBottom());
         search = tabsView.findViewById(R.id.hg_top_tab_search);
         search.setColorFilter(tabConfig.getTabTextColor());
-
+        if (!tabConfig.isShowSearch()){
+            search.setVisibility(View.GONE);
+        }
         if (!tabConfig.isBottmShow()) {
             tabsView.setVisibility(View.GONE);
         }

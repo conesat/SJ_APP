@@ -1,7 +1,6 @@
 package com.hg.ui.view;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
@@ -9,19 +8,43 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.hg.ui.R;
+import com.hg.ui.jcvideoplayer_lib.JCVideoPlayer;
+import com.hg.ui.layout.HGImageRecyclerView;
 
 public class NewsItemView extends LinearLayout {
     public CircularImageView userIcon;
     public TextView userName;
     public TextView sendTime;
     public TextView nesDetail;
-    public RecyclerView medias;
+    public LinearLayout medias;
     public ImageView recommendIcon;
     public ImageView forwardIcon;
     public ImageView commentIcon;
     public TextView recommendText;
     public TextView forwardText;
     public TextView commentText;
+
+    private JCVideoPlayer jcVideoPlayer;
+
+    public JCVideoPlayer getJcVideoPlayer() {
+        return jcVideoPlayer;
+    }
+
+    public void removeView(){
+        medias.removeAllViews();
+    }
+
+    public void setJcVideoPlayer(JCVideoPlayer jcVideoPlayer) {
+        this.jcVideoPlayer = jcVideoPlayer;
+        medias.removeAllViews();
+        medias.addView(this.jcVideoPlayer);
+    }
+
+    public void setImgView(HGImageRecyclerView hgImageRecyclerView) {
+        medias.removeAllViews();
+        medias.addView(hgImageRecyclerView.getView());
+    }
+
 
     public NewsItemView(Context context) {
         super(context);

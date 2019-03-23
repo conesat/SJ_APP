@@ -8,10 +8,12 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
         android:orientation="vertical">
 
         <LinearLayout
+            android:layout_marginRight="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center|left">
@@ -26,7 +28,7 @@
                 android:id="@+id/hg_news_user_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="15dp"
                 android:layout_weight="1"
                 android:text=""
                 android:textColor="#333"
@@ -48,6 +50,9 @@
             android:orientation="vertical">
 
             <TextView
+                android:layout_marginRight="15dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="5dp"
                 android:textColor="#333"
                 android:id="@+id/hg_news_detail"
                 android:layout_width="wrap_content"
@@ -55,13 +60,17 @@
                 android:layout_marginBottom="10dp"
                 android:textSize="14sp" />
 
-            <android.support.v7.widget.RecyclerView
+            <LinearLayout
                 android:id="@+id/hg_news_medias"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:background="#707070"></android.support.v7.widget.RecyclerView>
+                android:layout_height="wrap_content"
+                android:background="#fff">
+
+            </LinearLayout>
 
             <LinearLayout
+                android:layout_marginRight="15dp"
+                android:layout_marginLeft="15dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp">
@@ -134,6 +143,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="10dp"
-        android:layout_marginTop="-10dp"
+        android:layout_marginTop="10dp"
         android:background="#F5F5F5"></LinearLayout>
 </LinearLayout>

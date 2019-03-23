@@ -3,10 +3,11 @@ package com.hg.ui.builder;
 import com.hg.ui.theme.BaseTheme;
 import com.hg.ui.theme.BlueTheme;
 import com.hg.ui.theme.NormalTheme;
+import com.hg.ui.theme.RedTheme;
 
 public enum  ThemeBuilder {
 
-    NORMAL,BLUE;
+    NORMAL,BLUE,RED;
 
     public static BaseTheme THEME=new NormalTheme();
 
@@ -18,8 +19,13 @@ public enum  ThemeBuilder {
         switch (themeBuilder){
             case NORMAL:
                 THEME=new NormalTheme();
+                break;
             case BLUE:
                 THEME=new BlueTheme();
+                break;
+            case RED:
+                THEME=new RedTheme();
+                break;
         }
     }
 

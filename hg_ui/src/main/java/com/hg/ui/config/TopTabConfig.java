@@ -8,6 +8,15 @@ public class TopTabConfig extends TabConfig {
     private int tabBackgroudColor = Color.WHITE;
     private LayoutBounds layoutBounds = new LayoutBounds(50,20,50,10);
     private int tabTextColor = Color.GRAY;
+    private boolean showSearch=true;
+
+    public boolean isShowSearch() {
+        return showSearch;
+    }
+
+    public void setShowSearch(boolean showSearch) {
+        this.showSearch = showSearch;
+    }
 
     public void setTabHeight(int tabHeight) {
         this.tabHeight = tabHeight;

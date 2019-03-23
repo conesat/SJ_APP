@@ -11,12 +11,13 @@
     </LinearLayout>
 
     <ImageView
+        android:id="@+id/my_refresh"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="80dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="60dp"
         android:src="@drawable/refresh" />
 
     <ImageView
@@ -24,6 +25,6 @@
         android:layout_height="40dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_margin="20dp"
+        android:layout_margin="10dp"
         android:src="@drawable/send" />
 </RelativeLayout>
