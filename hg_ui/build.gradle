@@ -36,4 +36,5 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.5.2'
     implementation 'de.greenrobot:eventbus:2.4.0'
     implementation 'com.nostra13.universalimageloader:universal-image-loader:1.9.4'
+    implementation 'com.github.Aspsine:SwipeToLoadLayout:1.0.4'
 }

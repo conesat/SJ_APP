@@ -1,2 +1,1 @@
 include ':app', ':hg_ui'
-include ':hdmediaplayer'

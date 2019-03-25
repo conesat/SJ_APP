@@ -3,6 +3,7 @@
     android:id="@+id/hg_top_tab_tabs_root"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+
     android:orientation="horizontal"
     android:gravity="center">
 
@@ -30,10 +31,10 @@
 
              <LinearLayout
                  android:id="@+id/tab_bottm"
-                 android:layout_width="0dp"
+                 android:layout_width="match_parent"
                  android:layout_height="2dp"
                  android:background="#fff">
-                 <!--底部滑动条-->
+
              </LinearLayout>
         </LinearLayout>
 

@@ -86,11 +86,10 @@ class ResizeSurfaceView extends SurfaceView {
         } else {
             // no size yet, just adopt the given spec sizes
         }
-      /*  double scr = height / (getResources().getDisplayMetrics().heightPixels * 1.0);
-        if (scr > (2.0 / 3.0)) {
-            height = getResources().getDisplayMetrics().heightPixels;
-            width = (int) (width * scr);
-        }*/
+
+        if (height!=getResources().getDisplayMetrics().heightPixels&&height>getResources().getDisplayMetrics().heightPixels/3.0*2){
+            height=(int)(getResources().getDisplayMetrics().heightPixels/3.0*2);
+        }
 
         setMeasuredDimension(width, height);
     }

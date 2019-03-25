@@ -18,7 +18,7 @@ import com.hg.ui.config.LayoutBounds;
 import com.hg.ui.layout.HGBottomTab;
 import com.hg.ui.layout.HGNewsListView;
 import com.hg.ui.layout.HGTopTab;
-import com.hg.ui.view.ReloadListView;
+import com.hg.ui.listener.OnSwapeListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,20 +44,19 @@ public class MainActivity extends AppCompatActivity {
         mainView = findViewById(R.id.main_view);//在该视图下添加
 
         final List<HGBottomTabView> hgBottomTabViews = new ArrayList<>();//主视图列表
-        ThemeBuilder.builderTheme(ThemeBuilder.RED);//创建全局主题
+        ThemeBuilder.builderTheme(ThemeBuilder.BLUE);//创建全局主题
 
         //第一个页面详细
-        hgNewsListView = new HGNewsListView(this, DataHelper.hgNewsItemEntities);
+        hgNewsListView = new HGNewsListView(this, DataHelper.suiji(10));
 
         List<HGTopTabView> hgTopTabViews = new ArrayList<>();//页面内容列表
-        hgTopTabViews.add(new HGTopTabView("关注", hgNewsListView.getListView()));//添加一个预置动态布局
-        hgTopTabViews.add(new HGTopTabView("随机标题", LayoutInflater.from(MainActivity.this).inflate(R.layout.test, null)));
-        hgTopTabViews.add(new HGTopTabView("随机标题加长长", LayoutInflater.from(MainActivity.this).inflate(R.layout.hg_news_item, null)));
+        hgTopTabViews.add(new HGTopTabView("关注", LayoutInflater.from(MainActivity.this).inflate(R.layout.test, null)));//添加一个预置动态布局
+        hgTopTabViews.add(new HGTopTabView("推荐", hgNewsListView));
+        hgTopTabViews.add(new HGTopTabView("官方", LayoutInflater.from(MainActivity.this).inflate(R.layout.hg_news_item, null)));
         hgTopTabViews.add(new HGTopTabView("周边", LayoutInflater.from(MainActivity.this).inflate(R.layout.hg_news_item, null)));
-        hgTopTabViews.add(new HGTopTabView("新的界面", LayoutInflater.from(MainActivity.this).inflate(R.layout.hg_news_item, null)));
-        hgTopTabViews.add(new HGTopTabView("新的界面2", LayoutInflater.from(MainActivity.this).inflate(R.layout.test_new, null)));
 
-        hgTopTab = new HGTopTab(this, hgTopTabViews, null);
+
+        hgTopTab = new HGTopTab(this, hgTopTabViews, null, 1);
         newsView = LayoutInflater.from(this).inflate(R.layout.tab_news_layout, null);
         ((LinearLayout) newsView.findViewById(R.id.news)).addView(hgTopTab.getView());
 
@@ -88,18 +87,15 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void otherSetting() {
-        //监听动态消息布局的下拉刷新与上拉加载
-        hgNewsListView.setListViewListener(new ReloadListView.LoadListener() {
+        hgNewsListView.setOnSwapeListener(new OnSwapeListener() {
             @Override
-            public void onLoad() {
-                DataHelper.loadMore();//加载内容
-                hgNewsListView.loadComplete();
+            public void onRefresh() {
+                hgNewsListView.refreshData(DataHelper.suiji(10));
             }
 
             @Override
-            public void pullLoad() {
-                DataHelper.reload();//刷新
-                hgNewsListView.loadComplete();
+            public void onLoadMore() {
+                hgNewsListView.loadData(DataHelper.suiji(10));
             }
         });
 
@@ -107,6 +103,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 DataHelper.reload();
+                hgNewsListView.refreshData(DataHelper.suiji(10));
                 hgNewsListView.loadComplete();
             }
         });

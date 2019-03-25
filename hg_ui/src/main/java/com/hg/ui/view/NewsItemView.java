@@ -26,23 +26,30 @@ public class NewsItemView extends LinearLayout {
 
     private JCVideoPlayer jcVideoPlayer;
 
+    private HGImageRecyclerView hgImageRecyclerView;
+
+    public HGImageRecyclerView getHgImageRecyclerView() {
+        return hgImageRecyclerView;
+    }
+
+    public void setHgImageRecyclerView(final HGImageRecyclerView hgImageRecyclerView) {
+        this.hgImageRecyclerView = hgImageRecyclerView;
+        medias.removeAllViews();
+        medias.addView(hgImageRecyclerView);
+        medias.invalidate();
+    }
+
     public JCVideoPlayer getJcVideoPlayer() {
         return jcVideoPlayer;
     }
 
-    public void removeView(){
-        medias.removeAllViews();
-    }
-
-    public void setJcVideoPlayer(JCVideoPlayer jcVideoPlayer) {
+    public void setJcVideoPlayer(final JCVideoPlayer jcVideoPlayer) {
         this.jcVideoPlayer = jcVideoPlayer;
-        medias.removeAllViews();
-        medias.addView(this.jcVideoPlayer);
-    }
 
-    public void setImgView(HGImageRecyclerView hgImageRecyclerView) {
         medias.removeAllViews();
-        medias.addView(hgImageRecyclerView.getView());
+        medias.addView(jcVideoPlayer);
+        medias.invalidate();
+
     }
 
 
@@ -62,5 +69,6 @@ public class NewsItemView extends LinearLayout {
         commentText = inflate.findViewById(R.id.hg_news_comment_text);
         nesDetail.setMaxLines(4);
         nesDetail.setEllipsize(TextUtils.TruncateAt.END);
+
     }
 }

@@ -5,7 +5,9 @@ import android.app.ActivityManager;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
 import android.graphics.Rect;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.PowerManager;
 import android.text.TextUtils;
@@ -26,8 +28,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hg.ui.R;
+import com.hg.ui.tools.ImageFilter;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.squareup.picasso.Picasso;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -95,7 +100,7 @@ public class JCVideoPlayer extends FrameLayout implements View.OnClickListener, 
 
     private static ImageView.ScaleType speScalType = null;
 
-    private int maxHeight=0;
+    private int maxHeight = 0;
 
     //控制视图暂停
     private DisplayMetrics dm;
@@ -105,6 +110,7 @@ public class JCVideoPlayer extends FrameLayout implements View.OnClickListener, 
     public JCVideoPlayer(Context context, AttributeSet attrs) {
         super(context, attrs);
         uuid = UUID.randomUUID().toString();
+        maxHeight = (int) (getResources().getDisplayMetrics().heightPixels / 3.0 * 2);
         init(context);
     }
 
@@ -118,18 +124,14 @@ public class JCVideoPlayer extends FrameLayout implements View.OnClickListener, 
 
         @Override
         public void onGlobalLayout() {
-            if (view.getHeight() > maxHeight&&!ifFullScreen)
+            if (view.getHeight() > maxHeight && !ifFullScreen)
                 view.getLayoutParams().height = maxHeight;
         }
     }
 
     private void init(Context context) {
-        maxHeight = (int)(getResources().getDisplayMetrics().heightPixels/3.0*2);
-
         View.inflate(context, R.layout.video_control_view, this);
-
         this.getViewTreeObserver().addOnGlobalLayoutListener(new OnViewGlobalLayoutListener(this));
-
         ivStart = (ImageView) findViewById(R.id.start);
         pbLoading = (ProgressBar) findViewById(R.id.loading);
         pbBottom = (ProgressBar) findViewById(R.id.bottom_progressbar);
@@ -190,7 +192,7 @@ public class JCVideoPlayer extends FrameLayout implements View.OnClickListener, 
      * @param title       标题 | title
      * @param ifShowTitle 是否在非全屏下显示标题 | The title is displayed in full-screen under
      */
-    public void setUp(String url, String thumb, String title, boolean ifShowTitle) {
+    public void setUp(String url, final String thumb, String title, boolean ifShowTitle) {
         setSkin();
         setIfShowTitle(ifShowTitle);
         if ((System.currentTimeMillis() - clickfullscreentime) < FULL_SCREEN_NORMAL_DELAY) return;
@@ -209,7 +211,42 @@ public class JCVideoPlayer extends FrameLayout implements View.OnClickListener, 
         ivStart.setVisibility(View.VISIBLE);
         llBottomControl.setVisibility(View.INVISIBLE);
         pbBottom.setVisibility(View.VISIBLE);
-        ImageLoader.getInstance().displayImage(thumb, ivThumb, Utils.getDefaultDisplayImageOption());
+
+        new Thread() {
+            public void run() {
+                try {
+                     final Bitmap bitmap = Picasso.with(getContext()).load(thumb).get();
+
+                    ((Activity) getContext()).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            setBackground(new BitmapDrawable(ImageFilter.blurBitmap(getContext(), bitmap, 20f)));
+
+                            int height=(int)(bitmap.getHeight()*1.0/bitmap.getWidth()*getResources().getDisplayMetrics().widthPixels);
+
+                            if (height>getResources().getDisplayMetrics().heightPixels/3.0*2){
+                                height=(int)(getResources().getDisplayMetrics().heightPixels/3.0*2);
+                            }
+                            ivThumb.getLayoutParams().height=height;
+                            ivThumb.getLayoutParams().width=LayoutParams.MATCH_PARENT;
+                            ivThumb.setScaleType(ImageView.ScaleType.CENTER_CROP);
+                            ivThumb.requestLayout();
+
+                            rlParent.getLayoutParams().height=height;
+                            rlParent.getLayoutParams().width=LayoutParams.MATCH_PARENT;
+                            rlParent.requestLayout();
+
+                            ivThumb.setImageBitmap(bitmap);
+                            invalidate();
+                        }
+                    });
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }.start();
+
         CURRENT_STATE = CURRENT_STATE_NORMAL;
         setTitleVisibility(View.VISIBLE);
         if (uuid.equals(JCMediaManager.intance().uuid)) {
@@ -221,6 +258,7 @@ public class JCVideoPlayer extends FrameLayout implements View.OnClickListener, 
         }
     }
 
+
     /**
      * <p>只在全全屏中调用的方法</p>
      * <p>Only in fullscreen can call this</p>
@@ -229,17 +267,18 @@ public class JCVideoPlayer extends FrameLayout implements View.OnClickListener, 
      * @param thumb 缩略图地址 | Thumbnail address
      * @param title 标题 | title
      */
-    public void setUpForFullscreen(String url, String thumb, String title) {
+    public void setUpForFullscreen(String url, final String thumb, String title) {
         setSkin();
         this.url = url;
         this.thumb = thumb;
         this.title = title;
         this.ifFullScreen = true;
-        if (ifFullScreen) {
+      //  if (ifFullScreen) {
             ivFullScreen.setImageResource(shrinkRecId == 0 ? R.drawable.shrink_video : shrinkRecId);
-        } else {
+
+   /*     } else {
             ivFullScreen.setImageResource(enlargRecId == 0 ? R.drawable.enlarge_video : enlargRecId);
-        }
+        }*/
         tvTitle.setText(title);
         ivThumb.setVisibility(View.VISIBLE);
         ivStart.setVisibility(View.VISIBLE);
@@ -252,6 +291,24 @@ public class JCVideoPlayer extends FrameLayout implements View.OnClickListener, 
             ifMp3 = true;
             loadMp3Thum();
         }
+
+        new Thread() {
+            public void run() {
+                try {
+                    final Bitmap bitmap = Picasso.with(getContext()).load(thumb).get();
+                    ((Activity) getContext()).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            setBackground(new BitmapDrawable(ImageFilter.blurBitmap(getContext(), bitmap, 20f)));
+                            invalidate();
+                        }
+                    });
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }.start();
     }
 
     /**
@@ -305,6 +362,7 @@ public class JCVideoPlayer extends FrameLayout implements View.OnClickListener, 
             cancelDismissControlViewTimer();
             cancelProgressTimer();
         }
+
     }
 
     public void onEventMainThread(VideoEvents videoEvents) {
@@ -358,6 +416,7 @@ public class JCVideoPlayer extends FrameLayout implements View.OnClickListener, 
                 int prev_state = Integer.valueOf(videoEvents.obj.toString());
                 setState(prev_state);
             }
+
         } else if (videoEvents.type == VideoEvents.VE_SURFACEHOLDER_CREATED) {
             if (isFromFullScreenBackHere) {
                 JCMediaManager.intance().mediaPlayer.setDisplay(surfaceHolder);
@@ -615,8 +674,7 @@ public class JCVideoPlayer extends FrameLayout implements View.OnClickListener, 
      * @param context
      * @return
      */
-    //private int isScreenOn = 0;
-
+//private int isScreenOn = 0;
     private boolean isBackground(Context context) {
         PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
         if (!pm.isScreenOn()) {
@@ -646,7 +704,6 @@ public class JCVideoPlayer extends FrameLayout implements View.OnClickListener, 
             surfaceView.getLocationInWindow(location);
             if (!surfaceView.getLocalVisibleRect(rect) || isBackground(getContext())) {
                 pasue();
-
             }
         }
         tvTimeCurrent.setText(Utils.stringForTime(currentTime));

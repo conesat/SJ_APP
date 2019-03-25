@@ -41,7 +41,9 @@ public class HGTopTab {
 
     private HorizontalScrollView horizontalScrollView;
 
-    public HGTopTab(Context context, List<HGTopTabView> hgTopTabViews, TopTabConfig tabConfig) {
+    private Integer initTab = 0;
+
+    public HGTopTab(Context context, List<HGTopTabView> hgTopTabViews, TopTabConfig tabConfig, Integer initTab) {
         this.context = context;
         this.rootLayout = new LinearLayout(context);
         this.hgTopTabViews = hgTopTabViews;
@@ -49,6 +51,9 @@ public class HGTopTab {
             this.tabConfig = ThemeBuilder.THEME.getTopTabConfig();
         } else {
             this.tabConfig = tabConfig;
+        }
+        if (initTab < hgTopTabViews.size() && initTab >= 0) {
+            this.initTab = initTab;
         }
         initView();
     }
@@ -65,18 +70,17 @@ public class HGTopTab {
         viewPager.setLayoutParams(param);
         LayoutInflater layoutInflater = LayoutInflater.from(context);
         LinearLayout mainView = layoutInflater.inflate(R.layout.hg_top_tab, null).findViewById(R.id.hg_top_tab_root);
-        View tabsView = layoutInflater.inflate(R.layout.hg_top_tab_tabs, null);
-        horizontalScrollView=tabsView.findViewById(R.id.hg_top_tab_tabs_horizontal_scroll);
+        final View tabsView = layoutInflater.inflate(R.layout.hg_top_tab_tabs, null);
+        horizontalScrollView = tabsView.findViewById(R.id.hg_top_tab_tabs_horizontal_scroll);
         tabsView.setPadding(tabConfig.getLayoutBounds().getLeft(), tabConfig.getLayoutBounds().getTop(), tabConfig.getLayoutBounds().getRight(), tabConfig.getLayoutBounds().getBottom());
         search = tabsView.findViewById(R.id.hg_top_tab_search);
         search.setColorFilter(tabConfig.getTabTextColor());
-        if (!tabConfig.isShowSearch()){
+        if (!tabConfig.isShowSearch()) {
             search.setVisibility(View.GONE);
         }
         if (!tabConfig.isBottmShow()) {
             tabsView.setVisibility(View.GONE);
         }
-
         tabBottom = tabsView.findViewById(R.id.tab_bottm);
         tabBottom.setBackgroundColor(tabConfig.getTabTextColor());
 
@@ -93,7 +97,8 @@ public class HGTopTab {
             final View tabView = layoutInflater.inflate(R.layout.hg_top_tab_tabs_text, null);
             ((TextView) tabView.findViewById(R.id.hg_top_tab_tabs_text)).setText(hgTopTabViews.get(i).getTabText());
             ((TextView) tabView.findViewById(R.id.hg_top_tab_tabs_text)).setTextColor(tabConfig.getTabTextColor());
-            final int finalI = i;
+            tabs.addView(tabView);
+           final int finalI = i;
             tabView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -101,15 +106,11 @@ public class HGTopTab {
                 }
             });
 
-            tabs.addView(tabView);
-            if (i == 0) {
+            if (i == initTab) {
                 tabView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
                     @Override
                     public void onGlobalLayout() {
-                        ViewGroup.LayoutParams param = new LinearLayout.LayoutParams(
-                                tabView.getWidth(),
-                                tabBottom.getHeight());
-                        tabBottom.setLayoutParams(param);
+                        setTabItem(initTab);
                         tabView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
                     }
                 });
@@ -141,7 +142,7 @@ public class HGTopTab {
             }
         };
 
-        TransformerBuilder.setViewPagerTransformer(viewPager,tabConfig.getStyle());
+        TransformerBuilder.setViewPagerTransformer(viewPager, tabConfig.getStyle());
 
         viewPager.setAdapter(pagerAdapter);
 
@@ -180,8 +181,9 @@ public class HGTopTab {
         rootLayout.addView(mainView);
     }
 
-    ValueAnimator locationVA;
-    ValueAnimator sizeVA;
+    ValueAnimator locationVA;//位置动画
+    ValueAnimator sizeVA;//大小动画
+
 
     public void setTabItem(int i) {
         if (locationVA != null) {
@@ -190,17 +192,21 @@ public class HGTopTab {
         if (sizeVA != null) {
             sizeVA.cancel();
         }
-        locationVA = ValueAnimator.ofInt((int) tabBottom.getX(), (int) tabs.getChildAt(i).getX());
         sizeVA = ValueAnimator.ofInt(tabBottom.getWidth(), tabs.getChildAt(i).getWidth());
+        locationVA = ValueAnimator.ofInt((int) tabBottom.getX(), (int) tabs.getChildAt(i).getX());
 
         locationVA.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator valueAnimator) {
                 int value = (Integer) valueAnimator.getAnimatedValue();
                 tabBottom.setX(value);
-                horizontalScrollView.smoothScrollTo((int)tabBottom.getX() - tabBottom.getWidth(), 0);
+                horizontalScrollView.smoothScrollTo((int) tabBottom.getX() - tabBottom.getWidth(), 0);
             }
         });
+        locationVA.setDuration(700);
+        locationVA.start();
+
+
         sizeVA.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator valueAnimator) {
@@ -209,13 +215,10 @@ public class HGTopTab {
                 tabBottom.requestLayout();
             }
         });
-        locationVA.setDuration(500);
-        locationVA.start();
-        sizeVA.setDuration(500);
+        sizeVA.setDuration(700);
         sizeVA.start();
 
         viewPager.setCurrentItem(i);
-
     }
 
     public void setOnTopTabChangeListener(OnTopTabChangeListener onTopTabChangeListener) {
