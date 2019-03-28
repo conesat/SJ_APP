@@ -15,7 +15,7 @@ public class NewsItemView extends LinearLayout {
     public CircularImageView userIcon;
     public TextView userName;
     public TextView sendTime;
-    public TextView nesDetail;
+    public TextView newsDetail;
     public LinearLayout medias;
     public ImageView recommendIcon;
     public ImageView forwardIcon;
@@ -24,9 +24,9 @@ public class NewsItemView extends LinearLayout {
     public TextView forwardText;
     public TextView commentText;
 
-    private JCVideoPlayer jcVideoPlayer;
+    public JCVideoPlayer jcVideoPlayer;
 
-    private HGImageRecyclerView hgImageRecyclerView;
+    public HGImageRecyclerView hgImageRecyclerView;
 
     public HGImageRecyclerView getHgImageRecyclerView() {
         return hgImageRecyclerView;
@@ -59,7 +59,7 @@ public class NewsItemView extends LinearLayout {
         userIcon = inflate.findViewById(R.id.hg_news_user_icon);
         userName = inflate.findViewById(R.id.hg_news_user_name);
         sendTime = inflate.findViewById(R.id.hg_news_send_time);
-        nesDetail = inflate.findViewById(R.id.hg_news_detail);
+        newsDetail = inflate.findViewById(R.id.hg_news_detail);
         medias = inflate.findViewById(R.id.hg_news_medias);
         recommendIcon = inflate.findViewById(R.id.hg_news_recommend_icon);
         forwardIcon = inflate.findViewById(R.id.hg_news_forward_icon);
@@ -67,8 +67,9 @@ public class NewsItemView extends LinearLayout {
         recommendText = inflate.findViewById(R.id.hg_news_recommend_text);
         forwardText = inflate.findViewById(R.id.hg_news_forward_text);
         commentText = inflate.findViewById(R.id.hg_news_comment_text);
-        nesDetail.setMaxLines(4);
-        nesDetail.setEllipsize(TextUtils.TruncateAt.END);
+        newsDetail.setMaxLines(4);
+        newsDetail.setEllipsize(TextUtils.TruncateAt.END);
+
 
     }
 }

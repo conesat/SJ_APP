@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--最好是自定义View的类名，查看起来一目了然-->
+    <declare-styleable name="RoundLinearlayout">
+        <attr name="roundRadius" format="dimension"/>
+        <attr name="bgColor" format="color"/>
+        <attr name="strokeColor" format="color"/>
+        <attr name="strokeWidth" format="dimension"/>
+    </declare-styleable>
+</resources>

@@ -3,6 +3,9 @@ package com.hg.ui.entity;
 import java.util.List;
 
 public class HGNewsItemEntity {
+    private boolean isRecommened;//是否点赞
+
+    private String id;//消息id
 
     private String senderIconUrl;//发送者头像
 
@@ -97,15 +100,19 @@ public class HGNewsItemEntity {
     public HGNewsItemEntity() {
     }
 
-    public HGNewsItemEntity(String senderIconUrl, String senderName, String sendTime, String newsDetail, List<HGNewsMediaEntity> medias, String mediaType, Long commentNum, Long forwardNum, Long recommendNum) {
-        this.senderIconUrl = senderIconUrl;
-        this.senderName = senderName;
-        this.sendTime = sendTime;
-        this.newsDetail = newsDetail;
-        this.medias = medias;
-        this.mediaType = mediaType;
-        this.commentNum = commentNum;
-        this.forwardNum = forwardNum;
-        this.recommendNum = recommendNum;
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public boolean isRecommened() {
+        return isRecommened;
+    }
+
+    public void setRecommened(boolean recommened) {
+        isRecommened = recommened;
     }
 }

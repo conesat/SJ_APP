@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -7,83 +8,236 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:background="#028aff"></LinearLayout>
+        android:background="#028aff"
+        android:padding="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:paddingTop="20dp">
+
+            <RelativeLayout
+                android:layout_width="120dp"
+                android:layout_height="120dp">
+
+                <ImageView
+                    android:id="@+id/home_loading_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/loading" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="30dp"
+                    android:src="@drawable/home"
+                    android:tint="#fff" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/wihte_r_stroke"
+                    android:paddingLeft="30dp"
+                    android:paddingTop="5dp"
+                    android:paddingRight="30dp"
+                    android:paddingBottom="5dp"
+                    android:text="守护中"
+                    android:textColor="#fff"
+                    android:textSize="14sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:orientation="vertical"
             android:padding="5dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <LinearLayout
-
+                <com.hg.ui.view.RoundLinearlayout
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:layout_weight="1"
-                    android:background="#747474">
+                    android:padding="20dp"
+                    custom:bgColor="#03A9F4"
+                    custom:roundRadius="5dp">
+
+                    <com.hg.ui.view.SquareImageView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:src="@drawable/file_manager" />
+
                     <TextView
-                        android:id="@+id/test"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
-                </LinearLayout>
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="文件管理"
+                        android:textColor="#fff"
+                        android:textSize="16sp" />
+                </com.hg.ui.view.RoundLinearlayout>
 
-                <LinearLayout
+                <com.hg.ui.view.RoundLinearlayout
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:layout_weight="1"
-                    android:background="#747474"></LinearLayout>
+                    android:padding="20dp"
+                    custom:bgColor="#FFA202"
+                    custom:roundRadius="5dp">
 
+                    <com.hg.ui.view.SquareImageView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:src="@drawable/remote" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="远程管理"
+                        android:textColor="#fff"
+                        android:textSize="16sp" />
+                </com.hg.ui.view.RoundLinearlayout>
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <LinearLayout
+                <com.hg.ui.view.RoundLinearlayout
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:layout_weight="1"
-                    android:background="#747474"></LinearLayout>
+                    android:padding="20dp"
+                    custom:bgColor="#02B7FF"
+                    custom:roundRadius="5dp">
 
-                <LinearLayout
+                    <com.hg.ui.view.SquareImageView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:src="@drawable/prevention" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="预防丢失"
+                        android:textColor="#fff"
+                        android:textSize="16sp" />
+                </com.hg.ui.view.RoundLinearlayout>
+
+                <com.hg.ui.view.RoundLinearlayout
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:layout_weight="1"
-                    android:background="#747474"></LinearLayout>
+                    android:padding="20dp"
+                    custom:bgColor="#FF6702"
+                    custom:roundRadius="5dp">
+
+                    <com.hg.ui.view.SquareImageView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:src="@drawable/phone" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="找回手机"
+                        android:textColor="#fff"
+                        android:textSize="16sp" />
+                </com.hg.ui.view.RoundLinearlayout>
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <LinearLayout
+                <com.hg.ui.view.RoundLinearlayout
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:layout_weight="1"
-                    android:background="#747474"></LinearLayout>
+                    android:padding="20dp"
+                    custom:bgColor="#0291FF"
+                    custom:roundRadius="5dp">
 
-                <LinearLayout
+                    <com.hg.ui.view.SquareImageView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:src="@drawable/my_home" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="守机家园"
+                        android:textColor="#fff"
+                        android:textSize="16sp" />
+                </com.hg.ui.view.RoundLinearlayout>
+
+                <com.hg.ui.view.RoundLinearlayout
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:layout_weight="1"
-                    android:background="#747474"></LinearLayout>
+                    android:padding="20dp"
+                    custom:bgColor="#EBB400"
+                    custom:roundRadius="5dp">
 
+                    <com.hg.ui.view.SquareImageView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:src="@drawable/share" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="共享圈"
+                        android:textColor="#fff"
+                        android:textSize="16sp" />
+                </com.hg.ui.view.RoundLinearlayout>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

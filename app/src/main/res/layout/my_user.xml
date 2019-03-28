@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.hg.ui.view.RoundLinearlayout
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:gravity="center|left"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        app:roundRadius="5dp"
+        app:bgColor="#E7E7E7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp">
+        <ImageView
+            android:tint="#028aff"
+            android:src="@drawable/msg"
+            android:layout_width="20dp"
+            android:layout_height="20dp" />
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:text="消息中心"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </com.hg.ui.view.RoundLinearlayout>
+
+    <com.hg.ui.view.RoundLinearlayout
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:gravity="center|left"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        app:roundRadius="5dp"
+        app:bgColor="#E7E7E7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp">
+        <ImageView
+            android:tint="#9C27B0"
+            android:src="@drawable/my_index"
+            android:layout_width="20dp"
+            android:layout_height="20dp" />
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:text="我的圈子"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </com.hg.ui.view.RoundLinearlayout>
+
+    <com.hg.ui.view.RoundLinearlayout
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:gravity="center|left"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        app:roundRadius="5dp"
+        app:bgColor="#E7E7E7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp">
+        <ImageView
+            android:tint="#FF9800"
+            android:src="@drawable/collection"
+            android:layout_width="20dp"
+            android:layout_height="20dp" />
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:text="我的收藏"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </com.hg.ui.view.RoundLinearlayout>
+
+    <com.hg.ui.view.RoundLinearlayout
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:gravity="center|left"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        app:roundRadius="5dp"
+        app:bgColor="#E7E7E7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp">
+        <ImageView
+            android:tint="#E91E63"
+            android:src="@drawable/follow"
+            android:layout_width="20dp"
+            android:layout_height="20dp" />
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:text="我的关注"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </com.hg.ui.view.RoundLinearlayout>
+</LinearLayout>

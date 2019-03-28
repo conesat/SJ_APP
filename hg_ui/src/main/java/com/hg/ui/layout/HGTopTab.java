@@ -2,8 +2,10 @@ package com.hg.ui.layout;
 
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.graphics.Typeface;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -98,7 +100,7 @@ public class HGTopTab {
             ((TextView) tabView.findViewById(R.id.hg_top_tab_tabs_text)).setText(hgTopTabViews.get(i).getTabText());
             ((TextView) tabView.findViewById(R.id.hg_top_tab_tabs_text)).setTextColor(tabConfig.getTabTextColor());
             tabs.addView(tabView);
-           final int finalI = i;
+            final int finalI = i;
             tabView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -181,9 +183,9 @@ public class HGTopTab {
         rootLayout.addView(mainView);
     }
 
-    ValueAnimator locationVA;//位置动画
-    ValueAnimator sizeVA;//大小动画
-
+    private ValueAnimator locationVA;//位置动画
+    private ValueAnimator sizeVA;//底部条大小动画
+    private TextView beforTab;
 
     public void setTabItem(int i) {
         if (locationVA != null) {
@@ -192,6 +194,16 @@ public class HGTopTab {
         if (sizeVA != null) {
             sizeVA.cancel();
         }
+        if (beforTab == null) {
+            beforTab = (TextView) ((LinearLayout) tabs.getChildAt(i)).getChildAt(0);
+        } else {
+            beforTab.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
+            beforTab.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
+            beforTab = (TextView) ((LinearLayout) tabs.getChildAt(i)).getChildAt(0);
+            beforTab.setTextSize(TypedValue.COMPLEX_UNIT_SP, 17);
+            beforTab .setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
+        }
+
         sizeVA = ValueAnimator.ofInt(tabBottom.getWidth(), tabs.getChildAt(i).getWidth());
         locationVA = ValueAnimator.ofInt((int) tabBottom.getX(), (int) tabs.getChildAt(i).getX());
 
@@ -206,7 +218,6 @@ public class HGTopTab {
         locationVA.setDuration(700);
         locationVA.start();
 
-
         sizeVA.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator valueAnimator) {
@@ -215,10 +226,11 @@ public class HGTopTab {
                 tabBottom.requestLayout();
             }
         });
+
         sizeVA.setDuration(700);
         sizeVA.start();
-
         viewPager.setCurrentItem(i);
+
     }
 
     public void setOnTopTabChangeListener(OnTopTabChangeListener onTopTabChangeListener) {
