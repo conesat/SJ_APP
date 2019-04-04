@@ -206,7 +206,12 @@ public class HGBottomTab {
 
     public void setPage(int page) {
         resetIcon(page);
-        viewPager.setCurrentItem(page);
+        if (tabConfig.isOnClickTransformer()){
+            viewPager.setCurrentItem(page);
+        }else {
+            viewPager.setCurrentItem(page,false);
+        }
+
     }
 
     private void resetIcon(int page) {

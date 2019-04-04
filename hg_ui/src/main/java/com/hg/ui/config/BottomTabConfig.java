@@ -5,8 +5,17 @@ import android.graphics.Color;
 public class BottomTabConfig extends TabConfig {
     private int tabHeight = 50;
     private int textSize = 11;
+    private boolean onClickTransformer=true;//点击切换时开启效果
     private int tabBackgroudColor = Color.WHITE;
     private LayoutBounds layoutBounds = new LayoutBounds(10);
+
+    public boolean isOnClickTransformer() {
+        return onClickTransformer;
+    }
+
+    public void setOnClickTransformer(boolean onClickTransformer) {
+        this.onClickTransformer = onClickTransformer;
+    }
 
     public void setTabHeight(int tabHeight) {
         this.tabHeight = tabHeight;

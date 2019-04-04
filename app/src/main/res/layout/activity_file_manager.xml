@@ -1,93 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:custom="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#fff"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".activity.FileManagerActivity">
 
     <LinearLayout
-        android:gravity="center|left"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
         android:background="#028aff"
-        android:layout_width="match_parent"
-        android:layout_height="45dp">
-        <TextView
-            android:layout_marginRight="10dp"
-            android:layout_marginLeft="20dp"
-            android:textColor="#fff"
-            android:text="守护模式"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        android:gravity="center|left"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
         <ImageView
-            android:src="@drawable/more_down"
-            android:layout_width="15dp"
-            android:layout_height="15dp" />
-    </LinearLayout>
+            android:id="@+id/file_manager_back"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_margin="10dp"
+            android:src="@drawable/back" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="20dp">
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:paddingTop="20dp">
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:text="文件管理"
+            android:textColor="#fff"
+            android:textSize="16sp" />
 
-            <RelativeLayout
-                android:layout_width="120dp"
-                android:layout_height="120dp">
-
-                <ImageView
-                    android:id="@+id/home_loading_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/loading"
-                    android:tint="#028aff" />
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="30dp"
-                    android:src="@drawable/home"
-                    android:tint="#028aff" />
-            </RelativeLayout>
-
-            <com.hg.ui.view.RoundLinearlayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginTop="20dp"
-                android:gravity="center"
-                custom:bgColor="#00FFFFFF"
-                custom:roundRadius="60dp"
-                custom:strokeColor="#028aff"
-                custom:strokeWidth="1dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="30dp"
-                    android:paddingTop="5dp"
-                    android:paddingRight="30dp"
-                    android:paddingBottom="5dp"
-                    android:text="守护中"
-                    android:textColor="#028aff"
-                    android:textSize="14sp" />
-            </com.hg.ui.view.RoundLinearlayout>
-        </LinearLayout>
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/add" />
     </LinearLayout>
+
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:paddingTop="10dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:padding="5dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/phone"
+                    android:tint="#BEBEBE" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="本机文件：2.8G可用" />
+
+                    <ProgressBar
+                        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="3dp"
+                        android:layout_marginTop="5dp"
+                        android:max="100"
+                        android:progress="10"
+                        android:progressDrawable="@drawable/seekbar_style" />
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/more_down"
+                    android:tint="#BEBEBE" />
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -116,18 +121,24 @@
                         <com.hg.ui.view.SquareImageView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:src="@drawable/file_manager" />
+                            android:src="@drawable/picture" />
                     </com.hg.ui.view.RoundLinearlayout>
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="文件管理" />
+                        android:text="图片" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="（0）"
+                        android:textSize="10sp" />
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/view_home_remote"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -147,14 +158,21 @@
                         <com.hg.ui.view.SquareImageView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:src="@drawable/remote" />
+                            android:src="@drawable/vedio" />
                     </com.hg.ui.view.RoundLinearlayout>
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="远程管理" />
+                        android:text="视频" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="（0）"
+                        android:textSize="10sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -177,14 +195,21 @@
                         <com.hg.ui.view.SquareImageView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:src="@drawable/prevention" />
+                            android:src="@drawable/audio" />
                     </com.hg.ui.view.RoundLinearlayout>
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="预防丢失" />
+                        android:text="音频" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="（0）"
+                        android:textSize="10sp" />
                 </LinearLayout>
 
 
@@ -194,7 +219,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:orientation="horizontal">
 
                 <LinearLayout
@@ -217,14 +242,21 @@
                         <com.hg.ui.view.SquareImageView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:src="@drawable/phone" />
+                            android:src="@drawable/word" />
                     </com.hg.ui.view.RoundLinearlayout>
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="找回手机" />
+                        android:text="文档" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="（0）"
+                        android:textSize="10sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -247,14 +279,21 @@
                         <com.hg.ui.view.SquareImageView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:src="@drawable/my_home" />
+                            android:src="@drawable/zip" />
                     </com.hg.ui.view.RoundLinearlayout>
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="守机家园" />
+                        android:text="压缩文件" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="（0）"
+                        android:textSize="10sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -277,22 +316,68 @@
                         <com.hg.ui.view.SquareImageView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:src="@drawable/share" />
+                            android:src="@drawable/other" />
                     </com.hg.ui.view.RoundLinearlayout>
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="共享圈" />
-                </LinearLayout>
+                        android:text="其他" />
 
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="（0）"
+                        android:textSize="10sp" />
+                </LinearLayout>
 
             </LinearLayout>
 
-            <include layout="@layout/home_tow" />
+
+            <LinearLayout
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+               android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#eee"></LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/cloud"
+                    android:tint="#BEBEBE" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="备份文件到云端" />
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/right"
+                    android:tint="#BEBEBE" />
+            </LinearLayout>
 
         </LinearLayout>
     </ScrollView>
-
 </LinearLayout>

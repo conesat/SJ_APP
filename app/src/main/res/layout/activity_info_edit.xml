@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.InfoEditActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="#028aff"
+        android:gravity="center|left"
+        android:paddingLeft="10dp">
+
+        <ImageView
+            android:id="@+id/edit_info_back"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_margin="10dp"
+            android:src="@drawable/back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="编辑个人资料"
+            android:textColor="#fff"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+
+            <com.hg.ui.view.RoundLinearlayout
+                android:id="@+id/setting_user_img"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:paddingLeft="10dp"
+                android:paddingTop="2dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="2dp"
+                app:roundRadius="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="修改头像" />
+
+                <com.hg.ui.view.CircularImageView
+                    android:id="@+id/setting_user_img_view"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/user_img" />
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginLeft="5dp"
+                    android:src="@drawable/right"
+                    android:tint="#333" />
+            </com.hg.ui.view.RoundLinearlayout>
+
+            <com.hg.ui.view.RoundLinearlayout
+                android:id="@+id/setting_user_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:padding="10dp"
+                app:roundRadius="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="昵称" />
+
+                <TextView
+                    android:id="@+id/setting_user_name_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="" />
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginLeft="5dp"
+                    android:src="@drawable/right"
+                    android:tint="#333" />
+            </com.hg.ui.view.RoundLinearlayout>
+
+            <com.hg.ui.view.RoundLinearlayout
+                android:id="@+id/setting_user_sex"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:padding="10dp"
+                app:roundRadius="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="性别" />
+
+                <TextView
+                    android:id="@+id/setting_user_sex_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="男" />
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginLeft="5dp"
+                    android:src="@drawable/right"
+                    android:tint="#333" />
+            </com.hg.ui.view.RoundLinearlayout>
+
+
+            <com.hg.ui.view.RoundLinearlayout
+                android:id="@+id/setting_user_reallyname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:padding="10dp"
+                app:roundRadius="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="真实姓名" />
+
+                <TextView
+                    android:id="@+id/setting_user_reallyname_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="" />
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginLeft="5dp"
+                    android:src="@drawable/right"
+                    android:tint="#333" />
+            </com.hg.ui.view.RoundLinearlayout>
+
+            <com.hg.ui.view.RoundLinearlayout
+                android:id="@+id/setting_user_birthday"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:padding="10dp"
+                app:roundRadius="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="出生日期" />
+
+                <TextView
+                    android:id="@+id/setting_user_birthday_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="" />
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginLeft="5dp"
+                    android:src="@drawable/right"
+                    android:tint="#333" />
+            </com.hg.ui.view.RoundLinearlayout>
+
+            <com.hg.ui.view.RoundLinearlayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:padding="10dp"
+                app:roundRadius="5dp">
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="手机" />
+
+                <TextView
+                    android:id="@+id/setting_user_phone_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="" />
+            </com.hg.ui.view.RoundLinearlayout>
+
+            <com.hg.ui.view.RoundLinearlayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:padding="10dp"
+                app:roundRadius="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="加入日期" />
+
+                <TextView
+                    android:id="@+id/setting_user_join_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="" />
+
+            </com.hg.ui.view.RoundLinearlayout>
+
+            <com.hg.ui.view.RoundLinearlayout
+                android:id="@+id/setting_save"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:padding="10dp"
+                app:roundRadius="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="保存修改"
+                    android:textColor="#CF0707"
+                    android:textSize="16sp" />
+
+            </com.hg.ui.view.RoundLinearlayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.hg.sj_app.R;
 import com.hg.sj_app.helper.DataHelper;
 import com.hg.sj_app.view.MyView;
+import com.hg.sj_app.view.ViewHome;
 import com.hg.ui.HgUiLoader;
 import com.hg.ui.animator.HGRotateAnimation;
 import com.hg.ui.builder.HGBottomTabView;
@@ -21,9 +22,9 @@ import com.hg.ui.entity.HGNewsItemEntity;
 import com.hg.ui.layout.HGBottomTab;
 import com.hg.ui.layout.HGNewsListView;
 import com.hg.ui.layout.HGTopTab;
+import com.hg.ui.listener.HGScreenListener;
 import com.hg.ui.listener.OnNewsItemClickListener;
 import com.hg.ui.listener.OnSwapeListener;
-import com.hg.ui.listener.HGScreenListener;
 import com.hg.ui.view.NewsItemView;
 
 import java.util.ArrayList;
@@ -42,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
     private HGRotateAnimation viewHomeRotateAnimation;
     private HGRotateAnimation refreshRotateAnimation;
 
+    private MyView myView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
         //第一个页面详细
         hgNewsListView = new HGNewsListView(this, onNewsItemClickListener);
 
-        myFcousOn=new HGNewsListView(this,onNewsItemClickListener);
+        myFcousOn = new HGNewsListView(this, onNewsItemClickListener);
 
         List<HGTopTabView> hgTopTabViews = new ArrayList<>();//页面内容列表
         hgTopTabViews.add(new HGTopTabView("关注", myFcousOn));//添加一个预置动态布局
@@ -89,8 +91,7 @@ public class MainActivity extends AppCompatActivity {
         hgBottomTabViews.add(news);
         //第二个页面
 
-        View viewHome = LayoutInflater.from(this).inflate(R.layout.tab_home_layout, null);
-
+        ViewHome viewHome=new ViewHome(this);
         viewHomeRotateAnimation = new HGRotateAnimation(viewHome.findViewById(R.id.home_loading_view), true, 4000, true);
 
         HGBottomTabView home = new HGBottomTabView(viewHome,
@@ -99,7 +100,8 @@ public class MainActivity extends AppCompatActivity {
                 null, new LayoutBounds(0, 10));
         hgBottomTabViews.add(home);
         //第三个页面
-        HGBottomTabView my = new HGBottomTabView(new MyView(this),
+        myView = new MyView(this);
+        HGBottomTabView my = new HGBottomTabView(myView,
                 BitmapFactory.decodeResource(this.getResources(), R.drawable.my),
                 BitmapFactory.decodeResource(this.getResources(), R.drawable.my_1),
                 "我的", new LayoutBounds(0, 10));
@@ -123,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
             public void onLoadMore() {
                 myFcousOn.loadData(DataHelper.suiji(10));
             }
-        } );
+        });
 
         hgNewsListView.setOnSwapeListener(new OnSwapeListener() {
             @Override
@@ -136,7 +138,8 @@ public class MainActivity extends AppCompatActivity {
                 hgNewsListView.loadData(DataHelper.suiji(10));
             }
         });
-        refreshRotateAnimation=new HGRotateAnimation(newsView.findViewById(R.id.my_refresh),false,1000,true);
+
+        refreshRotateAnimation = new HGRotateAnimation(newsView.findViewById(R.id.my_refresh), false, 1000, true);
         newsView.findViewById(R.id.my_refresh).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -149,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
                         hgNewsListView.loadComplete();
                         refreshRotateAnimation.stop();
                     }
-                },2000);
+                }, 2000);
             }
         });
 
@@ -161,14 +164,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        (new  HGScreenListener(this)).begin(new HGScreenListener.ScreenStateListener() {
+        (new HGScreenListener(this)).begin(new HGScreenListener.ScreenStateListener() {
             @Override
             public void onScreenOn() {
                 viewHomeRotateAnimation.start();
             }
+
             @Override
             public void onScreenOff() {
             }
+
             @Override
             public void onUserPresent() {
             }
@@ -178,6 +183,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        myView.resetName();
         viewHomeRotateAnimation.start();
     }
 }

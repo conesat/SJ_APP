@@ -66,6 +66,7 @@ public class HGTopTab {
 
     private void initView() {
         viewPager = new ViewPager(context);
+        viewPager.setOffscreenPageLimit(hgTopTabViews.size());
         ViewGroup.LayoutParams param = new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT);

@@ -23,10 +23,32 @@
             android:layout_width="20dp"
             android:layout_height="20dp" />
         <TextView
+            android:layout_weight="1"
             android:layout_marginLeft="10dp"
             android:text="消息中心"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+        <com.hg.ui.view.RoundLinearlayout
+            app:strokeWidth="0dp"
+            app:bgColor="#ff00"
+            app:roundRadius="20dp"
+            android:paddingRight="5dp"
+            android:paddingLeft="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp">
+            <TextView
+                android:textSize="10sp"
+                android:gravity="center"
+                android:textColor="#fff"
+                android:text="99+"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </com.hg.ui.view.RoundLinearlayout>
+        <ImageView
+            android:tint="#B3B3B3"
+            android:src="@drawable/right"
+            android:layout_width="20dp"
+            android:layout_height="20dp" />
     </com.hg.ui.view.RoundLinearlayout>
 
     <com.hg.ui.view.RoundLinearlayout
@@ -46,10 +68,16 @@
             android:layout_width="20dp"
             android:layout_height="20dp" />
         <TextView
+            android:layout_weight="1"
             android:layout_marginLeft="10dp"
             android:text="我的圈子"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+        <ImageView
+            android:tint="#B3B3B3"
+            android:src="@drawable/right"
+            android:layout_width="20dp"
+            android:layout_height="20dp" />
     </com.hg.ui.view.RoundLinearlayout>
 
     <com.hg.ui.view.RoundLinearlayout
@@ -69,10 +97,16 @@
             android:layout_width="20dp"
             android:layout_height="20dp" />
         <TextView
+            android:layout_weight="1"
             android:layout_marginLeft="10dp"
             android:text="我的收藏"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+        <ImageView
+            android:tint="#B3B3B3"
+            android:src="@drawable/right"
+            android:layout_width="20dp"
+            android:layout_height="20dp" />
     </com.hg.ui.view.RoundLinearlayout>
 
     <com.hg.ui.view.RoundLinearlayout
@@ -92,9 +126,44 @@
             android:layout_width="20dp"
             android:layout_height="20dp" />
         <TextView
+            android:layout_weight="1"
             android:layout_marginLeft="10dp"
             android:text="我的关注"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+        <ImageView
+            android:tint="#B3B3B3"
+            android:src="@drawable/right"
+            android:layout_width="20dp"
+            android:layout_height="20dp" />
+    </com.hg.ui.view.RoundLinearlayout>
+
+    <com.hg.ui.view.RoundLinearlayout
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:gravity="center|left"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        app:roundRadius="5dp"
+        app:bgColor="#E7E7E7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp">
+        <ImageView
+            android:tint="#4A1EE9"
+            android:src="@drawable/phone"
+            android:layout_width="20dp"
+            android:layout_height="20dp" />
+        <TextView
+            android:layout_weight="1"
+            android:layout_marginLeft="10dp"
+            android:text="我的设备"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:tint="#B3B3B3"
+            android:src="@drawable/right"
+            android:layout_width="20dp"
+            android:layout_height="20dp" />
     </com.hg.ui.view.RoundLinearlayout>
 </LinearLayout>

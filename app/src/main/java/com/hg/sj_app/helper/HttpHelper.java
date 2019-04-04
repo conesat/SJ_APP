@@ -45,6 +45,8 @@ public class HttpHelper {
         Call call = okHttpClient.newCall(request);
         call.enqueue(callback);
     }
+
+
 /*
     private void downAsynFile(String url) {
         Request request = new Request.Builder().url(url).build();

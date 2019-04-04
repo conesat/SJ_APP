@@ -6,6 +6,39 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+
+    <com.hg.ui.view.RoundLinearlayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:gravity="center|left"
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="10dp"
+        app:bgColor="#E7E7E7"
+        app:roundRadius="5dp">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/password"
+            android:tint="#A55F5A" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:text="登录设置" />
+
+        <ImageView
+            android:tint="#B3B3B3"
+            android:src="@drawable/right"
+            android:layout_width="20dp"
+            android:layout_height="20dp" />
+    </com.hg.ui.view.RoundLinearlayout>
+
     <com.hg.ui.view.RoundLinearlayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -131,5 +164,39 @@
 
 
     </com.hg.ui.view.RoundLinearlayout>
+
+    <com.hg.ui.view.RoundLinearlayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="center|left"
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="10dp"
+        app:bgColor="#E7E7E7"
+        app:roundRadius="5dp">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/callback"
+            android:tint="#4CAF50" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:text="问题反馈" />
+
+        <ImageView
+            android:tint="#B3B3B3"
+            android:src="@drawable/right"
+            android:layout_width="20dp"
+            android:layout_height="20dp" />
+    </com.hg.ui.view.RoundLinearlayout>
+
 
 </LinearLayout>
