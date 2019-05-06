@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.AddFileActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="#028aff"
+        android:gravity="center|left"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <ImageView
+            android:onClick="back"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_margin="10dp"
+            android:src="@drawable/back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:text="加密文件"
+            android:textColor="#fff"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_marginTop="20dp"
+                android:id="@+id/view_home_file_manager"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <com.hg.ui.view.RoundLinearlayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginBottom="5dp"
+                    android:padding="15dp"
+                    app:bgColor="#03A9F4"
+                    app:roundRadius="200dp">
+
+                    <com.hg.ui.view.SquareImageView
+                        android:id="@+id/add_file_img"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/file_manager" />
+                </com.hg.ui.view.RoundLinearlayout>
+
+                <com.hg.ui.view.RoundLinearlayout
+                    app:bgColor="#eee"
+                    android:paddingRight="10dp"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:layout_margin="10dp"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <EditText
+                        android:layout_margin="0dp"
+                        android:padding="0dp"
+                        android:textColor="#6B6B6B"
+                        android:background="@null"
+                        android:textSize="15sp"
+                        android:id="@+id/add_file_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:hint="请输入文件名"
+                        android:text="" />
+                </com.hg.ui.view.RoundLinearlayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_margin="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <com.hg.ui.view.RoundLinearlayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="center|left"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="10dp"
+                    app:bgColor="#E7E7E7"
+                    app:roundRadius="5dp">
+                <LinearLayout
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/delete"
+                        android:tint="#F44336" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="1"
+                        android:text="删除源文件" />
+
+                    <Switch
+                        android:id="@+id/add_file_add_user_delete"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="false"
+                        android:theme="@style/Theme.AppCompat.DayNight" />
+                </LinearLayout>
+                </com.hg.ui.view.RoundLinearlayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <com.hg.ui.view.RoundLinearlayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:gravity="center|left"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="10dp"
+                        android:paddingRight="10dp"
+                        android:paddingBottom="10dp"
+                        app:bgColor="#E7E7E7"
+                        app:roundRadius="5dp">
+                        <LinearLayout
+                            android:gravity="center"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:src="@drawable/password"
+                                android:tint="#F436F1" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_weight="1"
+                                android:text="针对加密" />
+
+                            <Switch
+                                android:id="@+id/add_file_add_user_open"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:checked="true"
+                                android:theme="@style/Theme.AppCompat.DayNight" />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:id="@+id/add_file_add_user_layout"
+                            android:orientation="vertical"
+                            android:gravity="center"
+                            android:padding="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <LinearLayout
+                                android:orientation="vertical"
+                                android:id="@+id/add_file_add_user_list"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+                               <include layout="@layout/add_file_user_edit"/>
+                            </LinearLayout>
+                            <com.hg.ui.view.RoundLinearlayout
+                                android:id="@+id/add_file_add_user_button"
+                                android:layout_marginTop="20dp"
+                                app:roundRadius="20dp"
+                                android:paddingTop="6dp"
+                                android:paddingBottom="6dp"
+                                android:paddingLeft="30dp"
+                                android:paddingRight="30dp"
+                                android:gravity="center"
+                                app:bgColor="#028aff"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
+                                <TextView
+
+                                    android:textColor="#fff"
+                                    android:text="添加用户"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content" />
+                            </com.hg.ui.view.RoundLinearlayout>
+                        </LinearLayout>
+                    </com.hg.ui.view.RoundLinearlayout>
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <com.hg.ui.view.RoundLinearlayout
+        android:layout_gravity="center"
+       android:layout_margin="10dp"
+        app:roundRadius="20dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="40dp"
+        android:paddingRight="40dp"
+        android:gravity="center"
+        app:bgColor="#028aff"
+        android:id="@+id/add_file_add_user_finish"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:textSize="16sp"
+            android:textColor="#fff"
+            android:text="完成"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </com.hg.ui.view.RoundLinearlayout>
+</LinearLayout>

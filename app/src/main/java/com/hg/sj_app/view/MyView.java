@@ -15,7 +15,9 @@ import android.widget.TextView;
 
 import com.hg.sj_app.LoginActivity;
 import com.hg.sj_app.R;
+import com.hg.sj_app.activity.DownloadActivity;
 import com.hg.sj_app.activity.InfoEditActivity;
+import com.hg.sj_app.values.StaticValues;
 import com.hg.ui.animator.HGSelectViewAnimation;
 import com.hg.ui.view.CircularImageView;
 import com.hg.ui.view.RoundLinearlayout;
@@ -40,6 +42,8 @@ public class MyView extends LinearLayout implements View.OnClickListener {
     private TextView userName;//用户名
     private TextView userPhone;//用户手机
     private RoundLinearlayout editInfo;//编辑按钮
+
+    private RoundLinearlayout downloadManager;
 
 
     public MyView(Context context) {
@@ -67,8 +71,12 @@ public class MyView extends LinearLayout implements View.OnClickListener {
         userPhone=view.findViewById(R.id.my_user_phone);
         editInfo=view.findViewById(R.id.my_user_edit);
 
+        downloadManager=findViewById(R.id.my_download_manager);
+
+
         loginOut.setOnClickListener(this);
         editInfo.setOnClickListener(this);
+        downloadManager.setOnClickListener(this::onClick);
 
         userName.setText(preference.getString("userName", ""));
         userPhone.setText(preference.getString("userPhone", ""));
@@ -76,7 +84,7 @@ public class MyView extends LinearLayout implements View.OnClickListener {
 
 
         if (imgUrl!=null&&!imgUrl.equals("")){
-            Picasso.with(getContext()).load(imgUrl).into(userImg);
+            Picasso.with(getContext()).load(StaticValues.HOST_URL+"userFile/getFile?path="+imgUrl).into(userImg);
         }
 
 
@@ -132,10 +140,18 @@ public class MyView extends LinearLayout implements View.OnClickListener {
                 getContext().startActivity(new Intent(getContext(), LoginActivity.class));
                 ((Activity)getContext()).finish();
                 break;
+            case R.id.my_download_manager:
+                getContext().startActivity(new Intent(getContext(), DownloadActivity.class));
+                break;
+
         }
     }
 
     public void resetName(){
         userName.setText(preference.getString("userName", ""));
+        String imgUrl=preference.getString("userImgUrl", "");
+        if (imgUrl!=null&&!imgUrl.equals("")){
+            Picasso.with(getContext()).load(StaticValues.HOST_URL+"/userFile/getFile?path="+imgUrl).into(userImg);
+        }
     }
 }

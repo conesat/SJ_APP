@@ -1,5 +1,6 @@
 package com.hg.sj_app.activity;
 
+import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +11,7 @@ import android.widget.Toast;
 
 import com.hg.sj_app.R;
 import com.hg.sj_app.helper.DataHelper;
+import com.hg.sj_app.values.StaticValues;
 import com.hg.sj_app.view.MyView;
 import com.hg.sj_app.view.ViewHome;
 import com.hg.ui.HgUiLoader;
@@ -17,7 +19,9 @@ import com.hg.ui.animator.HGRotateAnimation;
 import com.hg.ui.builder.HGBottomTabView;
 import com.hg.ui.builder.HGTopTabView;
 import com.hg.ui.builder.ThemeBuilder;
+import com.hg.ui.config.BottomTabConfig;
 import com.hg.ui.config.LayoutBounds;
+import com.hg.ui.config.TopTabConfig;
 import com.hg.ui.entity.HGNewsItemEntity;
 import com.hg.ui.layout.HGBottomTab;
 import com.hg.ui.layout.HGNewsListView;
@@ -36,8 +40,9 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayout mainView;
     private HGTopTab hgTopTab;
     private HGNewsListView hgNewsListView;
-
     private HGNewsListView myFcousOn;
+    private HGNewsListView hgNewsListViewHG;
+    private HGNewsListView hgNewsListViewArround;
 
     private View newsView;
     private HGRotateAnimation viewHomeRotateAnimation;
@@ -63,23 +68,30 @@ public class MainActivity extends AppCompatActivity {
         OnNewsItemClickListener onNewsItemClickListener = new OnNewsItemClickListener() {
             @Override
             public void onClick(NewsItemView newsItemView, int clickItem, HGNewsItemEntity hgNewsItemEntity) {
-                Toast.makeText(MainActivity.this, clickItem + "+" + hgNewsItemEntity.getSenderName(), Toast.LENGTH_SHORT).show();
+                StaticValues.hgNewsItemEntity=hgNewsItemEntity;
+                if (clickItem==4||clickItem==8||clickItem==11){
+                    startActivity(new Intent(MainActivity.this,NewsDetailActivity.class));
+                }
             }
         };
 
         //第一个页面详细
         hgNewsListView = new HGNewsListView(this, onNewsItemClickListener);
-
         myFcousOn = new HGNewsListView(this, onNewsItemClickListener);
+        hgNewsListViewHG=new HGNewsListView(this, onNewsItemClickListener);
+        hgNewsListViewArround=new HGNewsListView(this, onNewsItemClickListener);
 
         List<HGTopTabView> hgTopTabViews = new ArrayList<>();//页面内容列表
         hgTopTabViews.add(new HGTopTabView("关注", myFcousOn));//添加一个预置动态布局
         hgTopTabViews.add(new HGTopTabView("推荐", hgNewsListView));
-        hgTopTabViews.add(new HGTopTabView("官方", LayoutInflater.from(MainActivity.this).inflate(R.layout.hg_news_item, null)));
-        hgTopTabViews.add(new HGTopTabView("周边", LayoutInflater.from(MainActivity.this).inflate(R.layout.hg_news_item, null)));
+        hgTopTabViews.add(new HGTopTabView("官方", hgNewsListViewHG));
+        hgTopTabViews.add(new HGTopTabView("周边", hgNewsListViewArround));
 
 
-        hgTopTab = new HGTopTab(this, hgTopTabViews, null, 1);
+        TopTabConfig topTabConfig=new TopTabConfig();
+        topTabConfig.setOnClickTransformer(false);
+        topTabConfig.setNoScroll(true);
+        hgTopTab = new HGTopTab(this, hgTopTabViews, topTabConfig, 1);
         newsView = LayoutInflater.from(this).inflate(R.layout.tab_news_layout, null);
         ((LinearLayout) newsView.findViewById(R.id.news)).addView(hgTopTab.getView());
 
@@ -106,8 +118,10 @@ public class MainActivity extends AppCompatActivity {
                 BitmapFactory.decodeResource(this.getResources(), R.drawable.my_1),
                 "我的", new LayoutBounds(0, 10));
         hgBottomTabViews.add(my);
-
-        hgBottomTab = new HGBottomTab(this, hgBottomTabViews, null);
+        BottomTabConfig bottomTabConfig=new BottomTabConfig();
+        bottomTabConfig.setOnClickTransformer(false);
+        bottomTabConfig.setNoScroll(true);
+        hgBottomTab = new HGBottomTab(this, hgBottomTabViews, bottomTabConfig,1);
         mainView.addView(hgBottomTab.getView());
 
         otherSetting();
@@ -138,6 +152,29 @@ public class MainActivity extends AppCompatActivity {
                 hgNewsListView.loadData(DataHelper.suiji(10));
             }
         });
+        hgNewsListViewHG.setOnSwapeListener(new OnSwapeListener() {
+            @Override
+            public void onRefresh() {
+                hgNewsListViewHG.refreshData(DataHelper.suiji(10));
+            }
+
+            @Override
+            public void onLoadMore() {
+                hgNewsListViewHG.loadData(DataHelper.suiji(10));
+            }
+        });
+
+        hgNewsListViewArround.setOnSwapeListener(new OnSwapeListener() {
+            @Override
+            public void onRefresh() {
+                hgNewsListViewArround.refreshData(DataHelper.suiji(10));
+            }
+
+            @Override
+            public void onLoadMore() {
+                hgNewsListViewArround.loadData(DataHelper.suiji(10));
+            }
+        });
 
         refreshRotateAnimation = new HGRotateAnimation(newsView.findViewById(R.id.my_refresh), false, 1000, true);
         newsView.findViewById(R.id.my_refresh).setOnClickListener(new View.OnClickListener() {
@@ -148,8 +185,22 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         DataHelper.reload();
-                        hgNewsListView.refreshData(DataHelper.suiji(10));
-                        hgNewsListView.loadComplete();
+                        if (hgTopTab.getPosition()==0){
+                            myFcousOn.refreshData(DataHelper.suiji(10));
+                            myFcousOn.loadComplete();
+                        }
+                        if (hgTopTab.getPosition()==1){
+                            hgNewsListView.refreshData(DataHelper.suiji(10));
+                            hgNewsListView.loadComplete();
+                        }
+                        if (hgTopTab.getPosition()==2){
+                            hgNewsListViewHG.refreshData(DataHelper.suiji(10));
+                            hgNewsListViewHG.loadComplete();
+                        }
+                        if (hgTopTab.getPosition()==3){
+                            hgNewsListViewArround.refreshData(DataHelper.suiji(10));
+                            hgNewsListViewArround.loadComplete();
+                        }
                         refreshRotateAnimation.stop();
                     }
                 }, 2000);
@@ -160,7 +211,7 @@ public class MainActivity extends AppCompatActivity {
         hgTopTab.setSearchOnclickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "dd", Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivity.this, "点击了搜索", Toast.LENGTH_LONG).show();
             }
         });
 

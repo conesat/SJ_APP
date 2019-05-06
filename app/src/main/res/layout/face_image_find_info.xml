@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:gravity="center"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <ImageView
+        android:id="@+id/find_img"
+        android:scaleType="fitCenter"
+        android:layout_width="match_parent"
+        android:layout_height="300dp" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_marginTop="10px"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/find_similarValue"
+            android:layout_margin="2dp"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="匹配度:" />
+        <TextView
+            android:paddingBottom="10dp"
+            android:id="@+id/find_type"
+            android:layout_margin="2dp"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="类型:" />
+
+        <TextView
+            android:id="@+id/find_name"
+            android:layout_margin="2dp"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="姓名:" />
+        <TextView
+            android:id="@+id/find_birthday"
+            android:layout_margin="2dp"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="生日:" />
+        <TextView
+            android:id="@+id/find_sex"
+            android:layout_margin="2dp"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="性别:" />
+        <TextView
+            android:id="@+id/find_pcc"
+            android:layout_margin="2dp"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="籍贯:" />
+        <TextView
+            android:id="@+id/find_creat_time"
+            android:layout_margin="2dp"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="发布日期:" />
+        <TextView
+            android:id="@+id/find_sender"
+            android:layout_margin="2dp"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="发起者:" />
+        <TextView
+            android:id="@+id/find_send_city"
+            android:layout_margin="2dp"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="发起地:" />
+        <TextView
+            android:id="@+id/find_idcard"
+            android:layout_margin="2dp"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="身份证:" />
+        <TextView
+            android:paddingTop="10dp"
+            android:layout_margin="2dp"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="详细:" />
+        <TextView
+            android:id="@+id/find_detail"
+            android:layout_margin="2dp"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" " />
+    </LinearLayout>
+</LinearLayout>

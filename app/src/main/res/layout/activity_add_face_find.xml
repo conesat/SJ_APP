@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#eee"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.AddFaceFindActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="#028aff"
+        android:gravity="center|left"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <ImageView
+            android:onClick="back"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_margin="10dp"
+            android:src="@drawable/back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:text="申请寻人"
+            android:textColor="#fff"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="vertical"
+            android:padding="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <com.hg.ui.view.RoundLinearlayout
+                android:layout_marginBottom="10dp"
+                app:roundRadius="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:id="@+id/add_face_find_name"
+                    android:textSize="15sp"
+                    android:maxLength="10"
+                    android:lines="1"
+                    android:textCursorDrawable="@null"
+                    android:hint="姓名"
+                    android:paddingBottom="5dp"
+                    android:paddingTop="5dp"
+                    android:paddingRight="10dp"
+                    android:paddingLeft="10dp"
+                    android:background="@null"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </com.hg.ui.view.RoundLinearlayout>
+            <com.hg.ui.view.RoundLinearlayout
+                android:layout_marginBottom="10dp"
+                app:roundRadius="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/add_face_find_birthday"
+                    android:onClick="chooseDate"
+                    android:textSize="15sp"
+                    android:maxLength="10"
+                    android:lines="1"
+                    android:textCursorDrawable="@null"
+                    android:hint="生日"
+                    android:paddingBottom="5dp"
+                    android:paddingTop="5dp"
+                    android:paddingRight="10dp"
+                    android:paddingLeft="10dp"
+                    android:background="@null"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </com.hg.ui.view.RoundLinearlayout>
+            <com.hg.ui.view.RoundLinearlayout
+                android:layout_marginBottom="10dp"
+                app:roundRadius="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:id="@+id/add_face_find_idcrad"
+                    android:textSize="15sp"
+                    android:maxLength="18"
+                    android:lines="1"
+                    android:textCursorDrawable="@null"
+                    android:hint="身份证"
+                    android:paddingBottom="5dp"
+                    android:paddingTop="5dp"
+                    android:paddingRight="10dp"
+                    android:paddingLeft="10dp"
+                    android:background="@null"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </com.hg.ui.view.RoundLinearlayout>
+            <com.hg.ui.view.RoundLinearlayout
+                android:layout_marginBottom="10dp"
+                app:roundRadius="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/add_face_find_city"
+                    android:onClick="chooseCity"
+                    android:textSize="15sp"
+                    android:maxLength="10"
+                    android:lines="1"
+                    android:textCursorDrawable="@null"
+                    android:hint="籍贯"
+                    android:paddingBottom="5dp"
+                    android:paddingTop="5dp"
+                    android:paddingRight="10dp"
+                    android:paddingLeft="10dp"
+                    android:background="@null"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </com.hg.ui.view.RoundLinearlayout>
+
+            <com.hg.ui.view.RoundLinearlayout
+                android:layout_marginBottom="10dp"
+                app:roundRadius="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/add_face_find_sex"
+                    android:onClick="chooseSex"
+                    android:textSize="15sp"
+                    android:maxLength="10"
+                    android:lines="1"
+                    android:textCursorDrawable="@null"
+                    android:hint="性别"
+                    android:paddingBottom="5dp"
+                    android:paddingTop="5dp"
+                    android:paddingRight="10dp"
+                    android:paddingLeft="10dp"
+                    android:background="@null"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </com.hg.ui.view.RoundLinearlayout>
+
+            <com.hg.ui.view.RoundLinearlayout
+                android:layout_marginBottom="10dp"
+                app:roundRadius="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:id="@+id/add_face_find_detail"
+                    android:textSize="15sp"
+                    android:maxLength="500"
+                    android:textCursorDrawable="@null"
+                    android:hint="详细"
+                    android:paddingBottom="5dp"
+                    android:paddingTop="5dp"
+                    android:paddingRight="10dp"
+                    android:paddingLeft="10dp"
+                    android:background="@null"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </com.hg.ui.view.RoundLinearlayout>
+            <com.hg.ui.view.RoundLinearlayout
+                android:layout_marginBottom="10dp"
+                app:roundRadius="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/add_face_find_img"
+                    android:onClick="chooseImg"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/choose_face"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp" />
+            </com.hg.ui.view.RoundLinearlayout>
+
+            <com.hg.ui.view.RoundLinearlayout
+                android:onClick="submit"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginLeft="30dp"
+                app:roundRadius="50dp"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_margin="10dp"
+                    android:text="提交审核"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </com.hg.ui.view.RoundLinearlayout>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

@@ -166,4 +166,33 @@
             android:layout_width="20dp"
             android:layout_height="20dp" />
     </com.hg.ui.view.RoundLinearlayout>
+    <com.hg.ui.view.RoundLinearlayout
+        android:id="@+id/my_download_manager"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:gravity="center|left"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        app:roundRadius="5dp"
+        app:bgColor="#E7E7E7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp">
+        <ImageView
+            android:tint="#4CAF50"
+            android:src="@drawable/download"
+            android:layout_width="20dp"
+            android:layout_height="20dp" />
+        <TextView
+            android:layout_weight="1"
+            android:layout_marginLeft="10dp"
+            android:text="下载管理"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:tint="#B3B3B3"
+            android:src="@drawable/right"
+            android:layout_width="20dp"
+            android:layout_height="20dp" />
+    </com.hg.ui.view.RoundLinearlayout>
 </LinearLayout>

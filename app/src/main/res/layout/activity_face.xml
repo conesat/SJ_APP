@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    android:orientation="vertical"
+    tools:context=".activity.FaceActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="#028aff"
+        android:gravity="center|left"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <ImageView
+            android:id="@+id/face_back"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_margin="10dp"
+            android:src="@drawable/back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:text="查找他/她的信息"
+            android:textColor="#fff"
+            android:textSize="16sp" />
+
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_marginBottom="30dp"
+                android:layout_marginTop="-100dp"
+                android:tint="#028aff"
+                android:src="@drawable/face"
+                android:layout_width="80dp"
+                android:layout_height="80dp" />
+
+            <TextView
+                android:gravity="center"
+                android:text="扫面图片中是否存在通缉/失联人员"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <com.hg.ui.view.RoundLinearlayout
+                android:id="@+id/face_picture"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:paddingLeft="30dp"
+                android:paddingTop="10dp"
+                android:paddingRight="30dp"
+                android:paddingBottom="10dp"
+                custom:bgColor="#028aff"
+                custom:roundRadius="50dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="选取图片"
+                    android:textColor="#fff" />
+            </com.hg.ui.view.RoundLinearlayout>
+            <com.hg.ui.view.RoundLinearlayout
+                android:id="@+id/face_scanning"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:paddingLeft="30dp"
+                android:paddingTop="10dp"
+                android:paddingRight="30dp"
+                android:paddingBottom="10dp"
+                custom:bgColor="#028aff"
+                custom:roundRadius="50dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="扫一扫"
+                    android:textColor="#fff" />
+            </com.hg.ui.view.RoundLinearlayout>
+
+
+        </LinearLayout>
+
+        <com.hg.ui.view.RoundLinearlayout
+            custom:roundRadius="50dp"
+            custom:bgColor="#028aff"
+            android:layout_marginBottom="20dp"
+            android:layout_centerInParent="true"
+            android:layout_alignParentBottom="true"
+            android:layout_width="50dp"
+            android:layout_height="50dp">
+            <ImageView
+                android:onClick="addFaceFind"
+                android:src="@drawable/add"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </com.hg.ui.view.RoundLinearlayout>
+    </RelativeLayout>
+
+
+</LinearLayout>

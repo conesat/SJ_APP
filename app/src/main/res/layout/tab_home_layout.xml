@@ -177,14 +177,14 @@
                         <com.hg.ui.view.SquareImageView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:src="@drawable/prevention" />
+                            android:src="@drawable/relation" />
                     </com.hg.ui.view.RoundLinearlayout>
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="预防丢失" />
+                        android:text="亲密关系" />
                 </LinearLayout>
 
 
@@ -198,6 +198,7 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
+                    android:id="@+id/view_home_find_phone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -228,6 +229,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/view_home_face"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -247,17 +249,18 @@
                         <com.hg.ui.view.SquareImageView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:src="@drawable/my_home" />
+                            android:src="@drawable/face" />
                     </com.hg.ui.view.RoundLinearlayout>
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="守机家园" />
+                        android:text="他是谁" />
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/view_home_share"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

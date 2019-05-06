@@ -31,9 +31,8 @@ import android.widget.Toast;
 import com.alibaba.fastjson.JSONObject;
 import com.hg.sj_app.R;
 import com.hg.sj_app.helper.HttpHelper;
-import com.hg.sj_app.service.ResponseInfoDto;
 import com.hg.sj_app.service.entity.UserInfo;
-import com.hg.sj_app.tools.FileUtilcll;
+import com.hg.sj_app.util.FileUtilcll;
 import com.hg.sj_app.values.StaticValues;
 import com.hg.ui.dialog.HGButtomDialog;
 import com.hg.ui.dialog.HGLoadDialog;
@@ -41,10 +40,8 @@ import com.hg.ui.listener.HGBottomDialogOnClickListener;
 import com.hg.ui.view.CircularImageView;
 import com.hg.ui.view.RoundLinearlayout;
 import com.squareup.picasso.Picasso;
-import com.zx.uploadlibrary.listener.ProgressListener;
-import com.zx.uploadlibrary.listener.impl.UIProgressListener;
-import com.zx.uploadlibrary.utils.OKHttpUtils;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -53,7 +50,8 @@ import java.util.Locale;
 
 import okhttp3.Call;
 import okhttp3.Callback;
-import okhttp3.FormBody;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
@@ -133,7 +131,7 @@ public class InfoEditActivity extends AppCompatActivity implements View.OnClickL
         joinDate.setText(preference.getString("userJoinDate", ""));
 
         if (preference.getString("userImgUrl", "")!=null&&!preference.getString("userImgUrl", "").equals("")){
-            Picasso.with(this).load(preference.getString("userImgUrl", "")).into(userImg);
+            Picasso.with(this).load(StaticValues.HOST_URL+"/userFile/getFile?path="+preference.getString("userImgUrl", "")).into(userImg);
         }
         handler = new Handler();
     }
@@ -168,11 +166,7 @@ public class InfoEditActivity extends AppCompatActivity implements View.OnClickL
 
     private void saveSetting() {
         httpHelper = new HttpHelper(this, "");
-        if (userImgUrlPath != null) {
-            upload();
-        } else {
-            updateUserInfo();
-        }
+        updateUserInfo();
     }
 
 
@@ -393,103 +387,27 @@ public class InfoEditActivity extends AppCompatActivity implements View.OnClickL
     }
 
 
-    //多文件上传（带进度）
-    public void upload() {
-        HGLoadDialog hgLoadDialog = new HGLoadDialog.Builder(this).setHint("图片上传中...").setOutside(false).create();
-        hgLoadDialog.show();
-        //这个是非ui线程回调，不可直接操作UI
-        final ProgressListener progressListener = new ProgressListener() {
-            @Override
-            public void onProgress(long bytesWrite, long contentLength, boolean done) {
-               /* Log.i("TAG", "bytesWrite:" + bytesWrite);
-                Log.i("TAG", "contentLength" + contentLength);
-                Log.i("TAG", (100 * bytesWrite) / contentLength + " % done ");
-                Log.i("TAG", "done:" + done);
-                Log.i("TAG", "================================");*/
-            }
-        };
-
-
-        //这个是ui线程回调，可直接操作UI
-        UIProgressListener uiProgressRequestListener = new UIProgressListener() {
-            @Override
-            public void onUIProgress(long bytesWrite, long contentLength, boolean done) {
-           /*     Log.i("TAG", "bytesWrite:" + bytesWrite);
-                Log.i("TAG", "contentLength" + contentLength);
-                Log.i("TAG", (100 * bytesWrite) / contentLength + " % done ");
-                Log.i("TAG", "done:" + done);
-                Log.i("TAG", "================================");*/
-                //ui层回调,设置当前上传的进度值
-                //  int progress = (int) ((100 * bytesWrite) / contentLength);
-                //  uploadProgress.setProgress(progress);
-                //  uploadTV.setText("上传进度值：" + progress + "%");
-            }
-
-            //上传开始
-            @Override
-            public void onUIStart(long bytesWrite, long contentLength, boolean done) {
-                super.onUIStart(bytesWrite, contentLength, done);
-
-            }
-
-            //上传结束
-            @Override
-            public void onUIFinish(long bytesWrite, long contentLength, boolean done) {
-                super.onUIFinish(bytesWrite, contentLength, done);
-                //uploadProgress.setVisibility(View.GONE); //设置进度条不可见
-                hgLoadDialog.cancel();
-                updateUserInfo();
-            }
-        };
-
-
-        //开始Post请求,上传文件
-        OKHttpUtils.doPostRequest(StaticValues.HOST_URL, initUploadFile(), uiProgressRequestListener, new Callback() {
-            @Override
-            public void onFailure(Call call, final IOException e) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        hgLoadDialog.cancel();
-                        showToast("图片上传失败");
-                    }
-                });
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                ResponseInfoDto responseInfoDto = JSONObject.parseObject(response.body().string(), ResponseInfoDto.class);
-                hgLoadDialog.cancel();
-                if (responseInfoDto.getCode() == 100) {
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            userImgUrlPathResponse = responseInfoDto.getMsg();
-                        }
-                    });
-                }
-            }
-        });
-
-    }
-
-    //初始化上传文件的数据
-    public List<String> initUploadFile() {
-        List<String> fileNames = new ArrayList<>();
-        fileNames.add(userImgUrlPath);
-        return fileNames;
-    }
 
     public void updateUserInfo() {
+        if(userName.getText().toString().equals("")){
+            showToast("请输入昵称");
+            return;
+        }
         hgLoadDialog = new HGLoadDialog.Builder(this).setHint("正在修改...").setOutside(false).create();
         hgLoadDialog.show();
-        RequestBody requestBody = new FormBody.Builder()
-                .add("userId", StaticValues.USER_ID)
-                .add("userBirthday", userBirthday.getText().toString())
-                .add("userName", userName.getText().toString())
-                .add("userReallyName", userReallyName.getText().toString())
-                .add("userSex", userSex.getText().toString())
-                .add("userImgUrl", userImgUrlPathResponse)
+
+        MultipartBody.Builder builder=new MultipartBody.Builder();
+        if (userImgUrlPath!=null){
+            builder.addFormDataPart("file", "xx.png",
+                    RequestBody.create(MediaType.parse("multipart/form-data"), new File(userImgUrlPath)));
+        }
+        RequestBody requestBody = builder
+                .setType(MultipartBody.FORM)
+                .addFormDataPart("userId", StaticValues.USER_ID)
+                .addFormDataPart("userBirthday", userBirthday.getText().toString())
+                .addFormDataPart("userName", userName.getText().toString())
+                .addFormDataPart("userReallyName", userReallyName.getText().toString())
+                .addFormDataPart("userSex", userSex.getText().toString())
                 .build();
 
         httpHelper.post(StaticValues.HOST_URL + "/user/update", requestBody, new Callback() {
@@ -498,23 +416,25 @@ public class InfoEditActivity extends AppCompatActivity implements View.OnClickL
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
-                        hgLoadDialog.cancel();
+                        hgLoadDialog.dismiss();
                         showToast("连接失败");
                     }
                 });
             }
-
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                ResponseInfoDto responseInfoDto = JSONObject.parseObject(response.body().string(), ResponseInfoDto.class);
+                JSONObject jsonObject = JSONObject.parseObject(response.body().string());
+
+                System.out.println(jsonObject.toJSONString()+"xxxxx");
+
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
-                        hgLoadDialog.cancel();
-                        if (responseInfoDto.getCode() != 100) {
-                            showToast(responseInfoDto.getMsg());
+                        hgLoadDialog.dismiss();
+                        if (!jsonObject.getString("code").equals("0")) {
+                            showToast(jsonObject.getString("data"));
                         } else {
-                            UserInfo userInfo = JSONObject.parseObject(responseInfoDto.getDetail(), UserInfo.class);
+                            UserInfo userInfo = JSONObject.parseObject(jsonObject.getString("data"), UserInfo.class);
                             SharedPreferences.Editor editor = preference.edit();
                             editor.putString("userName", userInfo.getUserName());
                             editor.putString("userImgUrl", userInfo.getUserImgUrl());
@@ -527,10 +447,9 @@ public class InfoEditActivity extends AppCompatActivity implements View.OnClickL
                         }
                     }
                 });
-
-
             }
         });
+
     }
 
     Toast toast;

@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    android:orientation="vertical"
+    tools:context=".activity.ShareActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="#028aff"
+        android:gravity="center|left"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <ImageView
+            android:id="@+id/find_phone_back"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_margin="10dp"
+            android:onClick="back"
+            android:src="@drawable/back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:text="获取共享资源"
+            android:textColor="#fff"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_margin="10dp"
+            android:onClick="toDownload"
+            android:src="@drawable/download" />
+    </LinearLayout>
+
+    <com.sothree.slidinguppanel.SlidingUpPanelLayout
+        xmlns:sothree="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/sliding_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom"
+        sothree:umanoPanelHeight="30dp"
+        sothree:umanoShadowHeight="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_marginTop="-100dp"
+                    android:layout_marginBottom="30dp"
+                    android:src="@drawable/share"
+                    android:tint="#028aff" />
+
+                <com.hg.ui.view.RoundLinearlayout
+                    android:layout_width="200dp"
+                    android:layout_height="40dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    custom:bgColor="#eee"
+                    custom:roundRadius="50dp">
+
+                    <EditText
+                        android:id="@+id/share_code"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:gravity="center"
+                        android:hint="输入分享码"
+                        android:maxLength="11"
+                        android:padding="0dp"
+                        android:textCursorDrawable="@null"
+                        android:textSize="14sp" />
+
+                </com.hg.ui.view.RoundLinearlayout>
+
+
+                <com.hg.ui.view.RoundLinearlayout
+                    android:id="@+id/get_share_file"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center"
+                    android:paddingLeft="30dp"
+                    android:paddingTop="10dp"
+                    android:paddingRight="30dp"
+                    android:paddingBottom="10dp"
+                    custom:bgColor="#028aff"
+                    custom:roundRadius="50dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="获取"
+                        android:textColor="#fff" />
+                </com.hg.ui.view.RoundLinearlayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:gravity="center|top"
+            android:orientation="vertical"
+            android:layout_marginBottom="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_marginBottom="3dp"
+                android:textSize="10sp"
+                android:text="我的共享列表"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <com.hg.ui.view.RoundLinearlayout
+                custom:strokeWidth="0dp"
+                custom:roundRadius="5dp"
+                android:layout_width="100dp"
+                android:layout_height="5dp"
+                custom:bgColor="#E2E2E2"></com.hg.ui.view.RoundLinearlayout>
+            <ListView
+                android:id="@+id/my_share"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </ListView>
+        </LinearLayout>
+    </com.sothree.slidinguppanel.SlidingUpPanelLayout>
+
+
+
+
+</LinearLayout>

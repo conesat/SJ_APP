@@ -6,12 +6,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.telephony.TelephonyManager;
 import android.view.View;
@@ -29,10 +31,14 @@ import com.hg.sj_app.activity.MainActivity;
 import com.hg.sj_app.helper.HttpHelper;
 import com.hg.sj_app.service.ResponseInfoDto;
 import com.hg.sj_app.service.UserDto;
+import com.hg.sj_app.util.EncryptionFile;
+import com.hg.sj_app.util.FileTypeUtil;
+import com.hg.sj_app.util.FileUtilcll;
 import com.hg.sj_app.values.StaticValues;
 import com.hg.ui.dialog.HGLoadDialog;
 import com.hg.ui.view.RoundLinearlayout;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.UUID;
@@ -76,6 +82,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private TextView vrifyNum;//验证码
     private TextView getVrifyNum;
 
+
+    //打开文件
+    private EncryptionFile encryptionFileOpen;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -105,8 +115,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         bgView = findViewById(R.id.loading_bg);
         layout = findViewById(R.id.loading_view_layout);
         preference = getSharedPreferences("user", MODE_PRIVATE);
+
         if (Calendar.getInstance().get(Calendar.HOUR_OF_DAY) < 10) {
-            bgView.setImageResource(R.drawable.good_night_img);
+            bgView.setImageResource(R.drawable.good_morning_img);
         } else if (Calendar.getInstance().get(Calendar.HOUR_OF_DAY) > 17) {
             ((TextView) findViewById(R.id.loding_big_text)).setText("晚上好");
             ((TextView) findViewById(R.id.loding_min_text)).setText("熬过了黑夜就是黎明");
@@ -114,7 +125,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         } else {
 
         }
-
+        LoginActivity.this.encryptionFileOpen = new EncryptionFile(LoginActivity.this);
+        Intent intent = getIntent();
+        String action = intent.getAction();
+        if (intent.ACTION_VIEW.equals(action)) {
+            hgLoadDialog = new HGLoadDialog.Builder(LoginActivity.this).setHint("正在解密文件...").setOutside(false).create();
+            hgLoadDialog.show();
+            openFile();
+            Uri uri = intent.getData();
+            new File(LoginActivity.this.getExternalCacheDir() + File.separator + "files").delete();
+            encryptionFileOpen.decryptFile(FileUtilcll.uriToFile(uri, LoginActivity.this).getPath(), LoginActivity.this.getExternalCacheDir() + File.separator + "files");
+            return;
+        }
 
         Handler handler = new Handler();
         if (preference.getString("userPhone", "").equals("")) {
@@ -131,7 +153,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 }
             }, 1500);
         } else {
-            StaticValues.USER_ID=preference.getString("userId", "");
+            StaticValues.USER_ID = preference.getString("userId", "");
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -140,6 +162,36 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 }
             }, 2500);
         }
+    }
+
+    public void openFile() {
+        encryptionFileOpen.setProcessListner(new EncryptionFile.ProcessListner() {
+            @Override
+            public void finish(String path, boolean done) {
+                hgLoadDialog.dismiss();
+                File file = new File(path);
+                if (file.exists()) {
+                    String type = FileTypeUtil.getMIMEType(file.getPath());
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                        Uri uri = FileProvider.getUriForFile(LoginActivity.this,
+                                BuildConfig.APPLICATION_ID + ".fileprovider",
+                                file);
+                        intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                        // 设置文件类型为Word
+                        intent.setDataAndType(uri, type);
+                    } else {
+                        Uri uri = Uri.fromFile(file);
+                        intent.setDataAndType(uri, type);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    }
+                    startActivity(intent);
+                } else if (path.equals("无权开启")) {
+                    Toast.makeText(LoginActivity.this, "抱歉您无权查看该文件", Toast.LENGTH_SHORT).show();
+                }
+                LoginActivity.this.finish();
+            }
+        });
     }
 
     private void initLoginView() {
@@ -254,7 +306,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     editor.putString("userReallyName", userDto.getUserInfo().getUserReallyName());
                     editor.putString("userSex", userDto.getUserInfo().getUserSex());
                     editor.putString("userJoinDate", userDto.getUserInfo().getUserJoinDate());
-                    StaticValues.USER_ID=userDto.getUserInfo().getUserId();
+                    StaticValues.USER_ID = userDto.getUserInfo().getUserId();
                     editor.commit();//提交数据
                     startActivity(new Intent(LoginActivity.this, MainActivity.class));
                     LoginActivity.this.finish();

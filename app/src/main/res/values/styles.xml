@@ -5,12 +5,14 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">#028aff</item>
         <item name="colorPrimaryDark">#028aff</item>
-        <item name="colorAccent">#fff</item>
+        <item name="colorAccent">#03A9F4</item>
+        <item name="android:windowActionBarOverlay">true</item>
     </style>
 
     <style name="MyDatePickerDialogTheme" parent="android:Theme.Material.Light.Dialog">
         <item name="android:colorPrimary">#028aff</item>
         <item name="android:colorPrimaryDark">#028aff</item>
         <item name="android:colorAccent">#028aff</item>
+        <item name="android:windowActionBarOverlay">true</item>
     </style>
 </resources>

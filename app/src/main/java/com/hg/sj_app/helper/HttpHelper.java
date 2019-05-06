@@ -47,6 +47,7 @@ public class HttpHelper {
     }
 
 
+
 /*
     private void downAsynFile(String url) {
         Request request = new Request.Builder().url(url).build();
