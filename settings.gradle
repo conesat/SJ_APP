@@ -1,1 +1,1 @@
-include ':app', ':hg_ui'
+include ':app', ':hg_ui', ':download'

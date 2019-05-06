@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:gravity="center"
+              android:orientation="horizontal"
+              android:layout_width="match_parent"
+              android:layout_height="140dp">
+
+    <com.hg.ui.ssq.widget.SSQCustomPicker
+        android:id="@+id/ssq_shengPicker"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content" />
+
+    <View
+        android:layout_width="5dp"
+        android:layout_height="wrap_content" />
+
+    <com.hg.ui.ssq.widget.SSQCustomPicker
+        android:id="@+id/ssq_shiPicker"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content" />
+
+    <View
+        android:layout_width="5dp"
+        android:layout_height="wrap_content" />
+
+    <com.hg.ui.ssq.widget.SSQCustomPicker
+        android:id="@+id/ssq_quPicker"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content" />
+</LinearLayout>

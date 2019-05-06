@@ -3,6 +3,7 @@ package com.hg.ui.adapter;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.view.ViewGroup;
 
 import com.hg.ui.entity.HGNewsMediaEntity;
@@ -48,7 +49,15 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
                         .into(myHolder.imageView);
             }
         }
-
+        myHolder.imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                /*Intent intent = new Intent(context, ShowPictureActivity.class);
+                intent.putExtra("path", pictureEntities.get(i).getReviewImgUrl());
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);*/
+            }
+        });
     }
 
 

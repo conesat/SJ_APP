@@ -66,7 +66,8 @@ public class HGTopTab {
 
     private void initView() {
         viewPager = new ViewPager(context);
-        viewPager.setOffscreenPageLimit(hgTopTabViews.size());
+        //viewPager.setOffscreenPageLimit(1);
+       // viewPager.setOffscreenPageLimit(hgTopTabViews.size());
         ViewGroup.LayoutParams param = new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT);
@@ -189,6 +190,14 @@ public class HGTopTab {
     private TextView beforTab;
 
     public void setTabItem(int i) {
+        int time=700;
+        if (tabConfig.isOnClickTransformer()){
+            viewPager.setCurrentItem(i);
+        }else {
+            time=100;
+            viewPager.setCurrentItem(i,false);
+        }
+
         if (locationVA != null) {
             locationVA.cancel();
         }
@@ -216,7 +225,7 @@ public class HGTopTab {
                 horizontalScrollView.smoothScrollTo((int) tabBottom.getX() - tabBottom.getWidth(), 0);
             }
         });
-        locationVA.setDuration(700);
+        locationVA.setDuration(time);
         locationVA.start();
 
         sizeVA.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
@@ -228,9 +237,10 @@ public class HGTopTab {
             }
         });
 
-        sizeVA.setDuration(700);
+        sizeVA.setDuration(time);
         sizeVA.start();
-        viewPager.setCurrentItem(i);
+
+      //  viewPager.setCurrentItem(i);
 
     }
 
@@ -240,5 +250,9 @@ public class HGTopTab {
 
     public void setSearchOnclickListener(View.OnClickListener onclickListener) {
         search.setOnClickListener(onclickListener);
+    }
+
+    public int getPosition(){
+        return viewPager.getCurrentItem();
     }
 }

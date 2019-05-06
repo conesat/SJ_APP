@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Library</string>
+    <string name="download_notification_title">正在下载</string>
+    <string name="download_notification_summary">%d个任务</string>
+</resources>

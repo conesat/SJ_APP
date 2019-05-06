@@ -19,12 +19,13 @@ import com.hg.ui.listener.OnBottomTabChangeListener;
 import com.hg.ui.tools.DensityUtil;
 import com.hg.ui.tools.ViewPagerScroller;
 import com.hg.ui.transformer.builder.TransformerBuilder;
+import com.hg.ui.view.NoScrollViewPager;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class HGBottomTab {
-    private ViewPager viewPager; //对应的viewPager;
+    private NoScrollViewPager viewPager; //对应的viewPager;
     private LinearLayout mainView;
     private List<HGBottomTabView> viewList;//view数组
     private List<HGBottomTabViewProtect> viewListP = new ArrayList<>();//view数组
@@ -36,13 +37,15 @@ public class HGBottomTab {
     private Context context;
     private OnBottomTabChangeListener onBottomTabChangeListener;
 
-    public HGBottomTab(Context context, List<HGBottomTabView> viewList, BottomTabConfig tabConfig) {
+    private int initTab=0;
+
+    public HGBottomTab(Context context, List<HGBottomTabView> viewList, BottomTabConfig tabConfig,int initTab) {
         if (tabConfig == null) {
             this.tabConfig = ThemeBuilder.THEME.getBottomTabConfig();
         } else {
             this.tabConfig = tabConfig;
         }
-
+        this.initTab=initTab;
         this.viewList = viewList;
         this.context = context;
         mainView = new LinearLayout(context);
@@ -55,8 +58,9 @@ public class HGBottomTab {
     }
 
     private void initView() {
-        viewPager = new ViewPager(context);
-        viewPager.setOffscreenPageLimit(3);
+        viewPager = new NoScrollViewPager(context);
+        viewPager.setScroll(tabConfig.isNoScroll());
+      //  viewPager.setOffscreenPageLimit(1);
         bottmLayout = new LinearLayout(context);
         bottmLayout.setOrientation(LinearLayout.HORIZONTAL);
 
@@ -123,8 +127,6 @@ public class HGBottomTab {
                     }
                 }
             });
-
-            setPage(0);
         }
 
         PagerAdapter pagerAdapter = new PagerAdapter() {
@@ -196,6 +198,8 @@ public class HGBottomTab {
 
         if (!tabConfig.isBottmShow())
             mainView.getChildAt(mainView.getChildCount() - 1).setVisibility(View.GONE);
+
+        setPage(initTab);
 
     }
 

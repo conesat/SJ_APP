@@ -56,7 +56,6 @@ public class RecyclerNewsListAdapter extends RecyclerView.Adapter<RecyclerNewsLi
     @Override
     public void onBindViewHolder(@NonNull final RecyclerNewsListViewHolder myHolder, int i) {
         NewsItemView newsItem = (NewsItemView) myHolder.itemView;
-
         Picasso.with(context).load(listItems.get(i).getSenderIconUrl()).into(newsItem.userIcon);
         if (listItems.get(i).getMedias() != null && listItems.get(i).getMedias().size() > 0) {
             if (listItems.get(i).getMediaType().equals("vedio")) {

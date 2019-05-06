@@ -5,9 +5,9 @@ import android.graphics.Color;
 public class TopTabConfig extends TabConfig {
     private int tabHeight = 40;
     private int textSize = 11;
-    private int tabBackgroudColor = Color.WHITE;
+    private int tabBackgroudColor = Color.rgb(2, 138, 255);
     private LayoutBounds layoutBounds = new LayoutBounds(50,20,50,10);
-    private int tabTextColor = Color.GRAY;
+    private int tabTextColor = Color.WHITE;
     private boolean showSearch=true;
 
     public boolean isShowSearch() {
